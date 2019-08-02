@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project basedir="." default="compile" name="TMEngine">
+    <property name="target" value="11"/>
+    <property name="source" value="11"/>
+    <property name="build.compiler" value="javac10+"/>
+    <path id="TMEngine.classpath">
+        <pathelement location="lib/dtd.jar"/>
+        <pathelement location="lib/json.jar"/>
+        <pathelement location="lib/jsoup-1.11.3.jar"/>
+        <pathelement location="lib/mapdb.jar"/>
+        <pathelement location="lib/openxliff.jar"/>
+    </path>
+    <target name="init">
+        <mkdir dir="bin"/>
+        <copy includeemptydirs="false" todir="bin">
+            <fileset dir="src">
+                <exclude name="**/*.java"/>
+            </fileset>
+        </copy>
+    </target>
+    <target name="clean">
+        <delete dir="bin"/>
+    </target>
+    <target name="compile" depends="clean,init">
+        <description>Build jar file</description>
+        <delete file="lib/tmengine.jar"/>
+        <javac srcdir="src" destdir="bin" classpathref="TMEngine.classpath" modulepathref="TMEngine.classpath" includeAntRuntime="false"/>
+        <jar destfile="lib/tmengine.jar" basedir="bin"/>
+    </target>
+</project>
