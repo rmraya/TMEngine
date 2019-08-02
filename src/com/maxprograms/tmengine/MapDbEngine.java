@@ -38,7 +38,7 @@ import org.mapdb.Fun.Tuple2;
 import org.xml.sax.SAXException;
 
 import com.maxprograms.tmx.TMXReader;
-import com.maxprograms.utils.TMUtils;
+import com.maxprograms.tmutils.TMUtils;
 import com.maxprograms.xml.Attribute;
 import com.maxprograms.xml.Element;
 import com.maxprograms.xml.Indenter;
@@ -128,7 +128,7 @@ public class MapDbEngine implements ITmEngine, AutoCloseable {
 	}
 
 	@Override
-	public void exportDatabase(String tmxfile, Set<String> langs, String srcLang, Map<String, String> props)
+	public void exportMemory(String tmxfile, Set<String> langs, String srcLang, Map<String, String> props)
 			throws IOException, SAXException, ParserConfigurationException {
 		Map<String, String> properties = props != null ? props : new Hashtable<>();
 		try (FileOutputStream output = new FileOutputStream(new File(tmxfile))) {

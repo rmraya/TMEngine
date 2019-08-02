@@ -9,7 +9,7 @@
  * Contributors:
  *     Maxprograms - initial API and implementation
  *******************************************************************************/
-package com.maxprograms.utils;
+package com.maxprograms.tmutils;
 
 import com.maxprograms.languages.RegistryParser;
 import com.maxprograms.xml.Element;

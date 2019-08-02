@@ -38,7 +38,7 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.xml.sax.SAXException;
 
 import com.maxprograms.tmx.TMXReader;
-import com.maxprograms.utils.TMUtils;
+import com.maxprograms.tmutils.TMUtils;
 import com.maxprograms.xml.Attribute;
 import com.maxprograms.xml.Element;
 import com.maxprograms.xml.Indenter;
@@ -203,7 +203,7 @@ public class SQLEngine implements ITmEngine {
 	}
 
 	@Override
-	public void exportDatabase(String tmxfile, Set<String> langs, String srcLang, Map<String, String> properties)
+	public void exportMemory(String tmxfile, Set<String> langs, String srcLang, Map<String, String> properties)
 			throws IOException, SAXException, ParserConfigurationException, SQLException {
 		if (languages == null) {
 			getAllLanguages();

@@ -14,7 +14,7 @@ package com.maxprograms.tmengine;
 import java.io.Serializable;
 import java.util.Map;
 
-import com.maxprograms.utils.TMUtils;
+import com.maxprograms.tmutils.TMUtils;
 import com.maxprograms.xml.Element;
 
 public class Match implements Serializable, Comparable<Match> {

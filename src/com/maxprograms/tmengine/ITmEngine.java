@@ -32,7 +32,7 @@ public interface ITmEngine {
 	public abstract int storeTMX(String tmxFile, String project, String customer, String subject)
 			throws SAXException, IOException, ParserConfigurationException, SQLException;
 
-	public abstract void exportDatabase(String tmxfile, Set<String> langs, String srcLang,
+	public abstract void exportMemory(String tmxfile, Set<String> langs, String srcLang,
 			Map<String, String> properties)
 			throws IOException, SAXException, ParserConfigurationException, SQLException;
 
