@@ -1,6 +1,6 @@
 # TMEngine
 
-![alt text](https://maxprograms.com/images/openxliff_s.png "OpenXLIFF Filters")
+![alt text](https://maxprograms.com/images/tmengine_s.png "TMEngine")
 
 An open source [Translation Memory](https://en.wikipedia.org/wiki/Translation_memory) Engine written in Java.
 
