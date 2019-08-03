@@ -85,6 +85,14 @@ public class TMUtils {
 				}
 				return null;
 			}
+			if (isRegion(parts[1])) {
+				// try lowercasing language code while keeping region number
+				String code = lang.substring(0, 2).toLowerCase() + "-" + parts[1];
+				if (!registry.getTagDescription(code).isEmpty()) {
+					return code;
+				}
+				return null;
+			}
 			// may have a script
 			String code = lang.substring(0, 2).toLowerCase() + "-" + lang.substring(3, 4).toUpperCase()
 					+ lang.substring(4).toLowerCase();
@@ -98,6 +106,17 @@ public class TMUtils {
 			return lang;
 		}
 		return null;
+	}
+
+	private static boolean isRegion(String string) {
+		if (string.length() != 3) {
+			return false;
+		}
+		return isNumber(string.charAt(0)) && isNumber(string.charAt(1)) && isNumber(string.charAt(2));
+	}
+
+	private static boolean isNumber(char c) {
+		return c >= '0' && c <= '9';
 	}
 
 	public static String createId() throws InterruptedException {
