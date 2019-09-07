@@ -16,9 +16,11 @@ module tmengine {
 
 	opens com.maxprograms.tmengine to mapdb;
 
+	requires json;
 	requires mapdb;
 	requires java.xml;
 	requires java.base;
 	requires java.sql;
+	requires jdk.httpserver;
 	requires transitive openxliff;
 }

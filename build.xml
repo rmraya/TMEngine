@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<project basedir="." default="compile" name="TMEngine">
+<project basedir="." default="dist" name="TMEngine">
     <property name="target" value="11"/>
     <property name="source" value="11"/>
     <property name="build.compiler" value="javac10+"/>
@@ -10,6 +10,9 @@
         <pathelement location="lib/mapdb.jar"/>
         <pathelement location="lib/openxliff.jar"/>
     </path>
+    <condition property="isWindows"> 
+        <os family="windows"/>
+    </condition>
     <target name="init">
         <mkdir dir="bin"/>
         <copy includeemptydirs="false" todir="bin">
@@ -21,10 +24,33 @@
     <target name="clean">
         <delete dir="bin"/>
     </target>
+        <target name="distclean">
+        <delete dir="dist" failonerror="false"/>
+    </target>
     <target name="compile" depends="clean,init">
         <description>Build jar file</description>
         <delete file="lib/tmengine.jar"/>
         <javac srcdir="src" destdir="bin" classpathref="TMEngine.classpath" modulepathref="TMEngine.classpath" includeAntRuntime="false"/>
         <jar destfile="lib/tmengine.jar" basedir="bin"/>
+    </target>
+    <target name="link" depends="distclean,compile">
+        <description>Build Java binaries</description>
+        <link destDir="dist" modulepath="lib:${java.home}/jmods">
+            <module name="tmengine"/>
+        </link>
+        <delete file="dist/lib/jrt-fs.jar"/>
+    </target>
+
+    <target name="copyBats" if="isWindows">
+        <description>Copy .bat to /dist</description>
+        <copy file="tmserver.bat" todir="dist"/>
+    </target>
+    <target name="copyShells" unless="isWindows">
+        <description>Copy .sh to /dist</description>
+        <copy file="tmserver.sh" todir="dist"/>
+    </target>
+    <target name="dist" depends="link,copyBats,copyShells">
+        <description>Prepare distribution</description>
+        <copy file="LICENSE" todir="dist"/>
     </target>
 </project>

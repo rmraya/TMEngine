@@ -1,2 +1,6 @@
 .DS_Store
 /bin/
+/dist/
+/sonar*
+.sonar_lock
+report-task.txt

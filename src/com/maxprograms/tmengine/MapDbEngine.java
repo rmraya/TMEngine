@@ -100,6 +100,17 @@ public class MapDbEngine implements ITmEngine, AutoCloseable {
 	}
 
 	@Override
+	public void deleteDatabase() throws IOException {
+		close();
+		TMUtils.deleteFolder(database.getAbsolutePath());
+	}
+
+	@Override
+	public String getType() {
+		return MapDbEngine.class.getName();
+	}
+
+	@Override
 	public void close() throws IOException {
 		fuzzyIndex.close();
 		tuDb.close();

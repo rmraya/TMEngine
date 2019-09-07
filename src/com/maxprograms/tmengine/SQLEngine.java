@@ -49,6 +49,10 @@ public class SQLEngine implements ITmEngine {
 
 	private Connection conn;
 	private String dbName;
+	private String serverName;
+	private int port;
+	private String userName;
+	private String password;
 
 	private String currProject;
 	private String currSubject;
@@ -76,6 +80,10 @@ public class SQLEngine implements ITmEngine {
 
 	public SQLEngine(String dbName, String serverName, int port, String userName, String password) throws SQLException {
 		this.dbName = dbName;
+		this.serverName = serverName;
+		this.port = port;
+		this.userName = userName;
+		this.password = password;
 		StringBuilder connBuilder = new StringBuilder();
 		connBuilder.append("jdbc:mariadb://");
 		connBuilder.append(serverName);
@@ -91,7 +99,7 @@ public class SQLEngine implements ITmEngine {
 			conn = DriverManager.getConnection(connBuilder.toString()); // "jdbc:mariadb://localhost:3306/DB?user=root&password=myPassword"
 			conn.setAutoCommit(false);
 		} catch (SQLException e) {
-			createDatabase(serverName, port, userName, password);
+			createDatabase();
 			conn = DriverManager.getConnection(connBuilder.toString());
 			conn.setAutoCommit(false);
 			LOGGER.log(Level.INFO, "Database " + dbName + " created.");
@@ -101,7 +109,12 @@ public class SQLEngine implements ITmEngine {
 		selectNgram = new Hashtable<>();
 	}
 
-	private void createDatabase(String serverName, int port, String userName, String password) throws SQLException {
+	@Override
+	public String getType() {
+		return SQLEngine.class.getName();
+	}
+
+	private void createDatabase() throws SQLException {
 		StringBuilder serverBuilder = new StringBuilder();
 		serverBuilder.append("jdbc:mariadb://");
 		serverBuilder.append(serverName);
@@ -122,6 +135,27 @@ public class SQLEngine implements ITmEngine {
 				stmt.execute("CREATE TABLE `" + dbName + "`.tuprop ( tuid VARCHAR(30) NOT NULL,"
 						+ " propType VARCHAR(30) NOT NULL, content TEXT, PRIMARY KEY (tuid, propType)" + ");");
 				stmt.execute("CREATE TABLE `" + dbName + "`.langs ( lang VARCHAR(15) NOT NULL);");
+			}
+		}
+	}
+
+	@Override
+	public void deleteDatabase() throws SQLException {
+		close();
+		StringBuilder serverBuilder = new StringBuilder();
+		serverBuilder.append("jdbc:mariadb://");
+		serverBuilder.append(serverName);
+		serverBuilder.append(':');
+		serverBuilder.append(port);
+		serverBuilder.append('/');
+		Properties prop = new Properties();
+		prop.setProperty("user", userName);
+		prop.setProperty("password", password);
+		prop.setProperty("useUnicode", "true");
+		prop.setProperty("characterEncoding", StandardCharsets.UTF_8.name());
+		try (Connection connection = DriverManager.getConnection(serverBuilder.toString(), prop)) {
+			try (Statement stmt = connection.createStatement()) {
+				stmt.execute("DROP DATABASE `" + dbName + "`");
 			}
 		}
 	}
@@ -263,7 +297,7 @@ public class SQLEngine implements ITmEngine {
 	@Override
 	public Set<String> getAllLanguages() throws SQLException {
 		if (languages == null) {
-			languages = new TreeSet<String>();
+			languages = new TreeSet<>();
 			try (Statement stmt = conn.createStatement()) {
 				try (ResultSet rs = stmt.executeQuery("SELECT lang FROM `" + dbName + "`.langs")) {
 					while (rs.next()) {
@@ -730,7 +764,7 @@ public class SQLEngine implements ITmEngine {
 	}
 
 	private static void writeString(FileOutputStream output, String string) throws IOException {
-		output.write(string.getBytes("UTF-8"));
+		output.write(string.getBytes(StandardCharsets.UTF_8));
 	}
 
 	@Override

@@ -20,10 +20,12 @@ import com.maxprograms.xml.XMLNode;
 import org.xml.sax.SAXException;
 
 import java.io.ByteArrayInputStream;
+import java.io.File;
 import java.io.IOException;
 import java.lang.System.Logger;
 import java.lang.System.Logger.Level;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Iterator;
@@ -200,4 +202,17 @@ public class TMUtils {
 		}
 		return text.toString();
 	}
+
+	public static void deleteFolder(String folder) throws IOException {
+        File f = new File(folder);
+        if (f.isDirectory()) {
+            String[] list = f.list();
+            for (int i = 0; i < list.length; i++) {
+                deleteFolder(new File(f, list[i]).getAbsolutePath());
+            }
+        }
+        Files.delete(f.toPath());
+    }
+
+    
 }

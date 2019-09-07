@@ -19,4 +19,9 @@ public class Constants {
 
 	public static final String CREATIONTOOL = "Maxprograms TM Engine";
 	public static final String VERSION = "5.0.0";
+	public static final String BUILD = "20190906_0844";
+
+	public static final String PENDING = "Pending";
+	public static final String COMPLETED = "Completed";
+	public static final String FAILED = "Failed";
 }

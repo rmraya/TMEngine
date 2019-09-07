@@ -25,6 +25,8 @@ import com.maxprograms.xml.Element;
 
 public interface ITmEngine {
 
+	public abstract String getType();
+
 	public abstract void close() throws IOException, SQLException;
 
 	public abstract String getName();
@@ -32,8 +34,7 @@ public interface ITmEngine {
 	public abstract int storeTMX(String tmxFile, String project, String customer, String subject)
 			throws SAXException, IOException, ParserConfigurationException, SQLException;
 
-	public abstract void exportMemory(String tmxfile, Set<String> langs, String srcLang,
-			Map<String, String> properties)
+	public abstract void exportMemory(String tmxfile, Set<String> langs, String srcLang, Map<String, String> properties)
 			throws IOException, SAXException, ParserConfigurationException, SQLException;
 
 	public abstract void flag(String tuid) throws SQLException;
@@ -61,4 +62,6 @@ public interface ITmEngine {
 
 	public abstract void removeTu(String tuid)
 			throws IOException, SAXException, ParserConfigurationException, SQLException;
+
+	public abstract void deleteDatabase() throws IOException, SQLException;
 }
