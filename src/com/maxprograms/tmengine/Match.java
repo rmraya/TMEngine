@@ -12,10 +12,13 @@
 package com.maxprograms.tmengine;
 
 import java.io.Serializable;
+import java.util.Iterator;
 import java.util.Map;
 
 import com.maxprograms.tmutils.TMUtils;
 import com.maxprograms.xml.Element;
+
+import org.json.JSONObject;
 
 public class Match implements Serializable, Comparable<Match> {
 
@@ -33,6 +36,24 @@ public class Match implements Serializable, Comparable<Match> {
 		this.similarity = similarity;
 		this.origin = origin;
 		this.properties = properties;
+	}
+
+	public JSONObject toJSON() {
+		JSONObject result = new JSONObject();
+		result.put("source", source.toString());
+		result.put("target", target.toString());
+		result.put("similarity", similarity);
+		result.put("origin", origin);
+		if (properties != null && !properties.isEmpty()) {
+			JSONObject props = new JSONObject();
+			Iterator<String> keys = properties.keySet().iterator();
+			while (keys.hasNext()) {
+				String key = keys.next();
+				props.put(key, properties.get(key));
+			}
+			result.put("properties", props);
+		}
+		return result;
 	}
 
 	public Element getSource() {
@@ -110,4 +131,5 @@ public class Match implements Serializable, Comparable<Match> {
 	public int hashCode() {
 		return source.hashCode() * target.hashCode() * similarity * origin.hashCode() * properties.hashCode();
 	}
+
 }

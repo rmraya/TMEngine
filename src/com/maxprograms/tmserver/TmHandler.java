@@ -26,12 +26,15 @@ import java.net.URI;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
+import java.util.Vector;
 import java.util.concurrent.ConcurrentHashMap;
 
 import javax.xml.parsers.ParserConfigurationException;
@@ -40,8 +43,10 @@ import com.maxprograms.server.IServer;
 import com.maxprograms.tmengine.Constants;
 import com.maxprograms.tmengine.ITmEngine;
 import com.maxprograms.tmengine.MapDbEngine;
+import com.maxprograms.tmengine.Match;
 import com.maxprograms.tmengine.SQLEngine;
 import com.maxprograms.tmutils.TMUtils;
+import com.maxprograms.xml.Element;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 
@@ -77,7 +82,7 @@ public class TmHandler implements HttpHandler {
         }
 
         String response = "";
-        
+
         response = processRequest(uri.toString(), request).toString(2);
         exchange.getResponseHeaders().add("content-type", "application/json");
         exchange.sendResponseHeaders(200, response.getBytes(StandardCharsets.UTF_8).length + 1l);
@@ -157,10 +162,6 @@ public class TmHandler implements HttpHandler {
         JSONObject result = new JSONObject();
         try {
             JSONObject json = new JSONObject(request);
-            if (!json.has("id")) {
-                result.put("reason", "Missing memory id");
-                return result;
-            }
             open(json.getString("id"));
         } catch (IOException | JSONException | SQLException e) {
             LOGGER.log(Level.ERROR, "Error opening memory", e);
@@ -172,18 +173,10 @@ public class TmHandler implements HttpHandler {
     private JSONObject closeMemory(String request) {
         JSONObject result = new JSONObject();
         try {
-            if (openEngines.isEmpty()) {
-                result.put("reason", "No open memories");
-                return result;
-            }
             JSONObject json = new JSONObject(request);
-            if (!json.has("id")) {
-                result.put("reason", "Missing memory id");
-                return result;
-            }
             close(json.getString("id"));
         } catch (IOException | JSONException | SQLException e) {
-            LOGGER.log(Level.ERROR, "Error opening memory", e);
+            LOGGER.log(Level.ERROR, "Error closing memory", e);
             result.put("reason", e.getMessage());
         }
         return result;
@@ -193,14 +186,6 @@ public class TmHandler implements HttpHandler {
         JSONObject result = new JSONObject();
         try {
             JSONObject json = new JSONObject(request);
-            if (!json.has("id")) {
-                result.put("reason", "Missing memory id");
-                return result;
-            }
-            if (!json.has("name")) {
-                result.put("reason", "Missing new memory name");
-                return result;
-            }
             String id = json.getString("id");
             JSONObject mem = memories.get(id);
             if ("MapDbEngine".equals(mem.getString("type"))) {
@@ -234,18 +219,10 @@ public class TmHandler implements HttpHandler {
     private JSONObject flag(String request) {
         JSONObject result = new JSONObject();
         final JSONObject json = new JSONObject(request);
-        if (!json.has("id")) {
-            result.put("reason", "Missing memory id");
-            return result;
-        }
-        if (!json.has("tuid")) {
-            result.put("reason", "Missing unit id");
-            return result;
-        }
-        String id = json.getString("id");
         final String process = "" + System.currentTimeMillis();
         new Thread(() -> {
             try {
+                String id = json.getString("id");
                 boolean shouldClose = !openEngines.containsKey(id);
                 if (shouldClose) {
                     open(id);
@@ -255,8 +232,8 @@ public class TmHandler implements HttpHandler {
                     close(id);
                 }
                 openTasks.put(process, new String[] { Constants.COMPLETED });
-            } catch (IOException | SQLException e) {
-                LOGGER.log(Level.ERROR, "Error getting languages list", e);
+            } catch (IOException | JSONException | SQLException e) {
+                LOGGER.log(Level.ERROR, "Error flagging TU", e);
                 openTasks.put(process, new String[] { Constants.FAILED, e.getMessage() });
             }
         }).start();
@@ -267,27 +244,79 @@ public class TmHandler implements HttpHandler {
 
     private JSONObject searchTranslations(String request) {
         JSONObject result = new JSONObject();
-        // TODO
+        final JSONObject json = new JSONObject(request);
+        final String process = "" + System.currentTimeMillis();
+        new Thread(() -> {
+            try {
+                String id = json.getString("id");
+                boolean shouldClose = !openEngines.containsKey(id);
+                if (shouldClose) {
+                    open(id);
+                }
+                Vector<Match> matches = openEngines.get(id).searchTranslation(json.getString("text"),
+                        json.getString("srcLang"), json.getString("tgtLang"), json.getInt("similarity"),
+                        json.getBoolean("caseSensitive"));
+                if (shouldClose) {
+                    close(id);
+                }
+                JSONArray array = new JSONArray();
+                for (int i = 0; i < matches.size(); i++) {
+                    array.put(matches.get(i).toJSON());
+                }
+                JSONObject obj = new JSONObject();
+                obj.put("matches", array);
+                openTasks.put(process, new String[] { Constants.COMPLETED, obj.toString(2) });
+            } catch (IOException | JSONException | SQLException | SAXException | ParserConfigurationException e) {
+                LOGGER.log(Level.ERROR, "Error searching translation", e);
+                openTasks.put(process, new String[] { Constants.FAILED, e.getMessage() });
+            }
+        }).start();
+        openTasks.put(process, new String[] { Constants.PENDING });
+        result.put("process", process);
         return result;
     }
 
     private JSONObject concordanceSearch(String request) {
         JSONObject result = new JSONObject();
-        // TODO
+        final JSONObject json = new JSONObject(request);
+        final String process = "" + System.currentTimeMillis();
+        new Thread(() -> {
+            try {
+                String id = json.getString("id");
+                boolean shouldClose = !openEngines.containsKey(id);
+                if (shouldClose) {
+                    open(id);
+                }
+                Vector<Element> entries = openEngines.get(id).concordanceSearch(json.getString("text"),
+                        json.getString("srcLang"), json.getInt("limit"), json.getBoolean("isRegexp"),
+                        json.getBoolean("caseSensitive"));
+                if (shouldClose) {
+                    close(id);
+                }
+                JSONArray array = new JSONArray();
+                for (int i = 0; i < entries.size(); i++) {
+                    array.put(entries.get(i).toString());
+                }
+                JSONObject obj = new JSONObject();
+                obj.put("entries", array);
+                openTasks.put(process, new String[] { Constants.COMPLETED, obj.toString(2) });
+            } catch (IOException | JSONException | SQLException | SAXException | ParserConfigurationException e) {
+                LOGGER.log(Level.ERROR, "Error searching concordance", e);
+                openTasks.put(process, new String[] { Constants.FAILED, e.getMessage() });
+            }
+        }).start();
+        openTasks.put(process, new String[] { Constants.PENDING });
+        result.put("process", process);
         return result;
     }
 
     private JSONObject getLanguages(String request) {
         JSONObject result = new JSONObject();
-        JSONObject json = new JSONObject(request);
-        if (!json.has("id")) {
-            result.put("reason", "Missing memory id");
-            return result;
-        }
-        final String id = json.getString("id");
+        final JSONObject json = new JSONObject(request);
         final String process = "" + System.currentTimeMillis();
         new Thread(() -> {
             try {
+                String id = json.getString("id");
                 boolean shouldClose = !openEngines.containsKey(id);
                 if (shouldClose) {
                     open(id);
@@ -337,23 +366,11 @@ public class TmHandler implements HttpHandler {
     private JSONObject exportMemory(String request) {
         JSONObject result = new JSONObject();
         final JSONObject json = new JSONObject(request);
-        if (!json.has("id")) {
-            result.put("reason", "Missing memory id");
-            return result;
-        }
-        if (!json.has("file")) {
-            result.put("reason", "Missing tmx file");
-            return result;
-        }
-        if (!json.has("srcLang")) {
-            result.put("reason", "Missing source language");
-            return result;
-        }
-        final String id = json.getString("id");
         final String process = "" + System.currentTimeMillis();
         new Thread(() -> {
             try {
-                final boolean shouldClose = !openEngines.containsKey(id);
+                String id = json.getString("id");
+                boolean shouldClose = !openEngines.containsKey(id);
                 if (shouldClose) {
                     open(id);
                 }
@@ -375,12 +392,16 @@ public class TmHandler implements HttpHandler {
                         properties.put(key, json.getString(key));
                     }
                 }
+                String srcLang = "*all*";
+                if (json.has("srcLang")) {
+                    srcLang = json.getString("srcLang");
+                }
                 ITmEngine engine = openEngines.get(id);
-                engine.exportMemory(json.getString("file"), langs, json.getString("srcLang"), properties);
+                engine.exportMemory(json.getString("file"), langs, srcLang, properties);
                 if (shouldClose) {
                     close(id);
                 }
-                openTasks.put(process, new String[] { Constants.COMPLETED, "" });
+                openTasks.put(process, new String[] { Constants.COMPLETED });
             } catch (IOException | SQLException | JSONException | SAXException | ParserConfigurationException e) {
                 LOGGER.log(Level.WARNING, "Error exporting TMX file", e);
                 openTasks.put(process, new String[] { Constants.FAILED, e.getMessage() });
@@ -394,25 +415,34 @@ public class TmHandler implements HttpHandler {
     private JSONObject importTMX(String request) {
         JSONObject result = new JSONObject();
         final JSONObject json = new JSONObject(request);
-        if (!json.has("id")) {
-            result.put("reason", "Missing memory id");
-            return result;
-        }
-        final String id = json.getString("id");
         final String process = "" + System.currentTimeMillis();
         new Thread(() -> {
             try {
-                final boolean shouldClose = !openEngines.containsKey(id);
+                String id = json.getString("id");
+                String project = "";
+                if (json.has("project")) {
+                    project = json.getString("project");
+                }
+                String subject = "";
+                if (json.has("subject")) {
+                    subject = json.getString("subject");
+                }
+                String customer = "";
+                if (json.has("customer")) {
+                    customer = json.getString("customer");
+                }
+                boolean shouldClose = !openEngines.containsKey(id);
                 if (shouldClose) {
                     open(id);
                 }
                 ITmEngine engine = openEngines.get(id);
-                int count = engine.storeTMX(json.getString("file"), json.getString("project"),
-                        json.getString("customer"), json.getString("subject"));
+                int count = engine.storeTMX(json.getString("file"), project, customer, subject);
                 if (shouldClose) {
                     close(id);
                 }
-                openTasks.put(process, new String[] { Constants.COMPLETED, "" + count });
+                JSONObject obj = new JSONObject();
+                obj.put("imported", "" + count);
+                openTasks.put(process, new String[] { Constants.COMPLETED, obj.toString(2) });
             } catch (IOException | SQLException | JSONException | SAXException | ParserConfigurationException e) {
                 LOGGER.log(Level.WARNING, "Error importing TMX file", e);
                 openTasks.put(process, new String[] { Constants.FAILED, e.getMessage() });
@@ -449,10 +479,6 @@ public class TmHandler implements HttpHandler {
         JSONObject result = new JSONObject();
         try {
             JSONObject json = new JSONObject(request);
-            if (!json.has("id")) {
-                result.put("reason", "Missing memory id");
-                return result;
-            }
             String id = json.getString("id");
             if (!memories.containsKey(id)) {
                 result.put("reason", "Unknown memory");
@@ -465,7 +491,7 @@ public class TmHandler implements HttpHandler {
             openEngines.remove(id);
             memories.remove(id);
             saveMemoriesList();
-        } catch (IOException | SQLException e) {
+        } catch (IOException | JSONException | SQLException e) {
             LOGGER.log(Level.ERROR, "Error deleting memory", e);
             result.put("reason", e.getMessage());
         }
@@ -554,9 +580,7 @@ public class TmHandler implements HttpHandler {
                 result.put("reason", "Duplicated id");
                 return result;
             }
-            if (!json.has("creationDate")) {
-                json.put("creationDate", System.currentTimeMillis());
-            }
+            json.put("creationDate", new SimpleDateFormat("yyyy-MM-dd HH:mm:ss z").format(new Date()));
             if (!json.has("owner")) {
                 json.put("owner", System.getProperty("user.name"));
             }
@@ -567,13 +591,11 @@ public class TmHandler implements HttpHandler {
             if ("MapDbEngine".equals(json.getString("type"))) {
                 engine = new MapDbEngine(json.getString("id"), getWorkFolder());
                 engine.close();
-            }
-            if ("SQLEngine".equals(json.getString("type"))) {
+            } else if ("SQLEngine".equals(json.getString("type"))) {
                 engine = new SQLEngine(json.getString("name"), json.getString("serverName"), json.getInt("port"),
                         json.getString("userName"), json.getString("password"));
                 engine.close();
-            }
-            if (engine == null) {
+            } else {
                 result.put("reason", "Unknown engine type");
                 return result;
             }
