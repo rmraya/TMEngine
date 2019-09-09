@@ -31,10 +31,10 @@ import java.util.Date;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
-import java.util.Vector;
 import java.util.concurrent.ConcurrentHashMap;
 
 import javax.xml.parsers.ParserConfigurationException;
@@ -58,7 +58,7 @@ import org.xml.sax.SAXException;
 public class TmHandler implements HttpHandler {
 
     private static final Logger LOGGER = System.getLogger(TmHandler.class.getName());
-    private ConcurrentHashMap<String, JSONObject> memories = new ConcurrentHashMap<>();;
+    private ConcurrentHashMap<String, JSONObject> memories = new ConcurrentHashMap<>();
     private ConcurrentHashMap<String, ITmEngine> openEngines = new ConcurrentHashMap<>();
     private ConcurrentHashMap<String, String[]> openTasks = new ConcurrentHashMap<>();
     private IServer server;
@@ -253,7 +253,7 @@ public class TmHandler implements HttpHandler {
                 if (shouldClose) {
                     open(id);
                 }
-                Vector<Match> matches = openEngines.get(id).searchTranslation(json.getString("text"),
+                List<Match> matches = openEngines.get(id).searchTranslation(json.getString("text"),
                         json.getString("srcLang"), json.getString("tgtLang"), json.getInt("similarity"),
                         json.getBoolean("caseSensitive"));
                 if (shouldClose) {
@@ -287,7 +287,7 @@ public class TmHandler implements HttpHandler {
                 if (shouldClose) {
                     open(id);
                 }
-                Vector<Element> entries = openEngines.get(id).concordanceSearch(json.getString("text"),
+                List<Element> entries = openEngines.get(id).concordanceSearch(json.getString("text"),
                         json.getString("srcLang"), json.getInt("limit"), json.getBoolean("isRegexp"),
                         json.getBoolean("caseSensitive"));
                 if (shouldClose) {
