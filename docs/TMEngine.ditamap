@@ -3,11 +3,8 @@
   PUBLIC "-//OASIS//DTD DITA BookMap//EN" "bookmap.dtd">
 <bookmap xml:lang="en-US">
   <booktitle>
-    <mainbooktitle>
-      <ph>TMEngine RESTful API</ph>
-      <image href="images/tmengine.png" placement="break"/>
-    </mainbooktitle>
-    <booktitlealt>TMEngine 5.0.0</booktitlealt>
+    <mainbooktitle> TMEngine</mainbooktitle>
+    <booktitlealt>An Open Source Translation Memory Manager</booktitlealt>
   </booktitle>
   <bookmeta>
     <author>Rodolfo M. Raya</author>
@@ -17,6 +14,17 @@
           <emailaddress>rmraya@maxprograms.com</emailaddress>
         </emailaddresses>
       </personinfo>
+      <organizationinfo>
+        <namedetails>
+          <organizationnamedetails>
+            <organizationname>Maxprograms</organizationname>
+          </organizationnamedetails>
+        </namedetails>
+
+        <urls>
+          <url>https://www.maxprograms.com</url>
+        </urls>
+      </organizationinfo>
     </authorinformation>
   </bookmeta>
   <frontmatter>
@@ -24,13 +32,24 @@
       <toc/>
     </booklists>
   </frontmatter>
-  <chapter href="topics/CreateMemory.dita"/>
-  <chapter href="topics/ListMemories.dita"/>
-  <chapter href="topics/OpenMemory.dita"/>
-  <chapter href="topics/CloseMemory.dita"/>
-  <chapter href="topics/ImportTMX.dita"/>
-  <chapter href="topics/ExportTMX.dita"/>
-  <chapter href="topics/SearchTranslations.dita"/>
-  <chapter href="topics/ConcordanceSearch.dita"/>
-  <chapter href="topics/DeleteMemory.dita"/>
+  <chapter navtitle="Overview">
+    <topicref href="TMEngine.dita"/>
+  </chapter>
+  <chapter navtitle="Java Library">
+    
+  </chapter>
+  <chapter navtitle="REST API">
+    <topicref href="topics/ServerAPI.dita"></topicref>
+    <topicref href="topics/CreateMemory.dita"/>
+    <topicref href="topics/ListMemories.dita"/>
+    <topicref href="topics/OpenMemory.dita"/>
+    <topicref href="topics/CloseMemory.dita"/>
+    <topicref href="topics/ImportTMX.dita"/>
+    <topicref href="topics/ExportTMX.dita"/>
+    <topicref href="topics/SearchTranslations.dita"/>
+    <topicref href="topics/ConcordanceSearch.dita"/>
+    <topicref href="topics/RenameMemory.dita"/>
+    <topicref href="topics/DeleteMemory.dita"/>
+    <topicref href="topics/StopServer.dita"/>
+  </chapter>
 </bookmap>

@@ -4,6 +4,60 @@
     <title>Create Memory</title>
     <body>
         <p>End Point: <codeph>[TMEngine URL]/create</codeph></p>
-        <p>Send a <codeph>post</codeph> request with these parameters in a JSON body:</p>
+        <p>Send a <codeph>post</codeph> request to the method end point with these parameters in a JSON body:</p>
+        <simpletable>
+            <sthead>
+                <stentry>Field</stentry>
+                <stentry>Required</stentry>
+                <stentry>Content</stentry>
+            </sthead>
+            <strow>
+                <stentry><apiname>id</apiname></stentry>
+                <stentry>No</stentry>
+                <stentry>ID of the memory to create. The value of ID must be unique. Default value is
+                    current server time represented as the number of milliseconds since January 1,
+                    1970, 00:00:00 GMT.</stentry>
+            </strow>
+            <strow>
+                <stentry><apiname>name</apiname></stentry>
+                <stentry>Yes</stentry>
+                <stentry/>
+            </strow>
+            <strow>
+                <stentry><apiname>owner</apiname></stentry>
+                <stentry>No</stentry>
+                <stentry/>
+            </strow>
+            <strow>
+                <stentry><apiname>type</apiname></stentry>
+                <stentry>No</stentry>
+                <stentry>Type of engine to use. Possible values are: <codeph>MapDbEngine</codeph>
+                    (default) and <codeph>SQLEngine</codeph></stentry>
+            </strow>
+        </simpletable>
+        
+        <p>Example:</p>
+        <codeblock translate="no">{
+   "name": "First Memory",
+   "type": "MapDbEngine"
+}</codeblock>
+        
+        <p>The server responds with a JSON object containing two fields.</p>
+        <p>On success, field <codeph>status</codeph> is set to <codeph>OK</codeph> and field
+                <codeph>id</codeph> contains the ID assigned to the new memory.</p>
+        
+        <p>Example:</p>
+        <codeblock translate="no">{
+   "status": "OK",            
+    "id": "1234567890987"        
+}</codeblock>
+        
+        <p>On error, field <codeph>status</codeph> is set to <codeph>failed</codeph> and field <codeph>reason</codeph> contains the error cause.</p>
+        
+        <p>Example:</p>
+        <codeblock translate="no">{
+   "status": "failed",            
+   "reason": "Duplicated id"        
+}</codeblock>
     </body>
 </topic>
