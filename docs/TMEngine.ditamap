@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE bookmap
+  PUBLIC "-//OASIS//DTD DITA BookMap//EN" "bookmap.dtd">
+<bookmap xml:lang="en-US">
+  <booktitle>
+    <mainbooktitle>
+      <ph>TMEngine RESTful API</ph>
+      <image href="images/tmengine.png" placement="break"/>
+    </mainbooktitle>
+    <booktitlealt>TMEngine 5.0.0</booktitlealt>
+  </booktitle>
+  <bookmeta>
+    <author>Rodolfo M. Raya</author>
+    <authorinformation>
+      <personinfo>
+        <emailaddresses>
+          <emailaddress>rmraya@maxprograms.com</emailaddress>
+        </emailaddresses>
+      </personinfo>
+    </authorinformation>
+  </bookmeta>
+  <frontmatter>
+    <booklists>
+      <toc/>
+    </booklists>
+  </frontmatter>
+  <chapter href="topics/CreateMemory.dita"/>
+  <chapter href="topics/ListMemories.dita"/>
+  <chapter href="topics/OpenMemory.dita"/>
+  <chapter href="topics/CloseMemory.dita"/>
+  <chapter href="topics/ImportTMX.dita"/>
+  <chapter href="topics/ExportTMX.dita"/>
+  <chapter href="topics/SearchTranslations.dita"/>
+  <chapter href="topics/ConcordanceSearch.dita"/>
+  <chapter href="topics/DeleteMemory.dita"/>
+</bookmap>

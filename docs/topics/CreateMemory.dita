@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE topic PUBLIC "-//OASIS//DTD DITA Topic//EN" "topic.dtd">
+<topic id="CreateEngine">
+    <title>Create Memory</title>
+    <body>
+        <p>End Point: <codeph>[TMEngine URL]/create</codeph></p>
+        <p>Send a <codeph>post</codeph> request with these parameters in a JSON body:</p>
+    </body>
+</topic>

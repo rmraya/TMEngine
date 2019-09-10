@@ -4,3 +4,5 @@
 /sonar*
 .sonar_lock
 report-task.txt
+/docs/out
+
