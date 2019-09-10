@@ -6,7 +6,7 @@
             href="https://en.wikipedia.org/wiki/Translation_memory" scope="external" format="html"
             >Translation Memory</xref> ™ manager written in Java.</shortdesc>
     <conbody>
-        <p>TMEngine can be used as an embedded library that manages translation memories in a Java
-            application or as a standalone TM server via its RESTfule API.</p>
+        <p>TMEngine can be used either as an embedded library that manages translation memories in a Java
+            application or as a standalone TM server via its REST API.</p>
     </conbody>
 </concept>
