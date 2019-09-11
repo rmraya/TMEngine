@@ -6,8 +6,9 @@
         <p>End Point: <codeph>[TMEngine URL]/create</codeph></p>
         <p>Default: <codeph conref="ServerAPI.dita#ServerAPI/defaultUrl"
             /><codeph>create</codeph></p>
-        
-        <p>Send a <codeph>POST</codeph> request to the method end point with these parameters in a JSON body:</p>
+
+        <p>Send a '<codeph>POST</codeph>' request to the method end point with these parameters in a
+            JSON body:</p>
         <simpletable>
             <sthead>
                 <stentry>Field</stentry>
@@ -35,29 +36,30 @@
             <strow>
                 <stentry><apiname>type</apiname></stentry>
                 <stentry>No</stentry>
-                <stentry>Type of engine to use. Possible values are: <codeph>MapDbEngine</codeph>
-                    (default) and <codeph>SQLEngine</codeph></stentry>
+                <stentry>Type of engine to use. Possible values are: '<codeph>MapDbEngine</codeph>'
+                    (default) and '<codeph>SQLEngine</codeph>'</stentry>
             </strow>
         </simpletable>
-        
+
         <p>Example:</p>
         <codeblock translate="no">{
   "name": "First Memory",
   "type": "MapDbEngine"
 }</codeblock>
-        
+
         <p>The server responds with a JSON object containing two fields.</p>
-        <p>On success, field <codeph>status</codeph> is set to <codeph>OK</codeph> and field
-                <codeph>id</codeph> contains the ID assigned to the new memory.</p>
-        
+        <p>On success, field '<codeph>status</codeph>' is set to '<codeph>OK</codeph>' and field
+                '<codeph>id</codeph>' contains the ID assigned to the new memory.</p>
+
         <p>Example:</p>
         <codeblock translate="no">{
   "status": "OK",            
   "id": "1234567890987"        
 }</codeblock>
-        
-        <p>On error, field <codeph>status</codeph> is set to <codeph>failed</codeph> and field <codeph>reason</codeph> contains the error cause.</p>
-        
+
+        <p>On error, field '<codeph>status</codeph>' is set to '<codeph>failed</codeph>' and field
+                '<codeph>reason</codeph>' contains the error cause.</p>
+
         <p>Example:</p>
         <codeblock translate="no">{
   "status": "failed",            

@@ -9,9 +9,9 @@
             <li><xref href="CreateMemory.dita"></xref></li>
             <li><xref href="ListMemories.dita"></xref></li>
             <li><xref href="OpenMemory.dita"></xref></li>
-            <li><xref href="ProcessStatus.dita"/></li>
             <li><xref href="CloseMemory.dita"></xref></li>
             <li><xref href="ImportTMX.dita"></xref></li>
+            <li><xref href="ProcessStatus.dita"/></li>
             <li><xref href="ExportTMX.dita"></xref></li>
             <li><xref href="SearchTranslations.dita"></xref></li>
             <li><xref href="SearchTranslations.dita"></xref></li>
@@ -19,12 +19,12 @@
             <li><xref href="DeleteMemory.dita"></xref></li>
             <li><xref href="StopServer.dita"></xref></li>
         </ul>
-        <p>Default TMEngine URL is <codeph id="defaultUrl">http://localhost:8000/TMServer/</codeph>.</p>
+        <p>Default TMEngine URL is '<codeph id="defaultUrl">http://localhost:8000/TMServer/</codeph>'.</p>
         <note>It is possible to select a custom port for the server, passing the
-                <codeph>-port</codeph> parameter to the script used for launching it.</note>
-        <p>All methods return a JSON object with a <codeph>status</codeph> field. Applications must
-            watch this field and verify that it is set to <codeph>OK</codeph>. </p>
-        <p>In case of error, the JSON response includes a field named <codeph>reason</codeph> that
+                '<codeph>-port</codeph>' parameter to the script used for launching it.</note>
+        <p>All methods return a JSON object with a '<codeph>status</codeph>' field. Applications must
+            watch this field and verify that it is set to '<codeph>OK</codeph>'. </p>
+        <p>In case of error, the JSON response includes a field named '<codeph>reason</codeph>' that
             contains the error cause.</p>
     </conbody>
 </concept>

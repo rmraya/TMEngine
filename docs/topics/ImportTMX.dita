@@ -3,8 +3,78 @@
 <topic id="ImportTMX">
     <title>Import TMX File</title>
     <body>
-        <p>End Point: <codeph>[TMEngine URL]/create</codeph></p>
+        <p>End Point: <codeph>[TMEngine URL]/import</codeph></p>
         <p>Default: <codeph conref="ServerAPI.dita#ServerAPI/defaultUrl"
-        /><codeph>import</codeph></p>
+            /><codeph>import</codeph></p>
+        <p>Send a '<codeph>POST</codeph>' request to the method end point with these parameters in a
+            JSON body:</p>
+        <simpletable>
+            <sthead>
+                <stentry>Field</stentry>
+                <stentry>Required</stentry>
+                <stentry>Content</stentry>
+            </sthead>
+            <strow>
+                <stentry><apiname>id</apiname></stentry>
+                <stentry>Yes</stentry>
+                <stentry>ID of the memory to populate with TMX data</stentry>
+            </strow>
+            <strow>
+                <stentry><apiname>file</apiname></stentry>
+                <stentry>Yes</stentry>
+                <stentry>Path to the TMX file being imported</stentry>
+            </strow>
+            <strow>
+                <stentry><apiname>subject</apiname></stentry>
+                <stentry>No</stentry>
+                <stentry>Name or identifier of the subject associated with the TMX file</stentry>
+            </strow>
+            <strow>
+                <stentry><apiname>client</apiname></stentry>
+                <stentry>No</stentry>
+                <stentry>Name or identifier of the client associated with the TMX file</stentry>
+            </strow>
+            <strow>
+                <stentry><apiname>project</apiname></stentry>
+                <stentry>No</stentry>
+                <stentry>Name or identifier of the project associated with the TMX file</stentry>
+            </strow>
+        </simpletable>
+
+        <p>Example:</p>
+        <codeblock translate="no">{
+  "id": "1568163112478",
+  "file": "/Volumes/Data/segments.tmx",
+  "project": "Main TM"
+}</codeblock>
+
+        <p>The server responds with a JSON object containing two fields.</p>
+        <p>On success, field '<codeph>status</codeph>' is set to '<codeph>OK</codeph>' and field
+                '<codeph>process</codeph>' contains the ID of the background import process that was
+            initiated.</p>
+
+        <codeblock translate="no">{
+  "process": "1568222345643",
+  "status": "OK"
+}</codeblock>
+
+        <p>On error, field '<codeph>status</codeph>' is set to '<codeph>failed</codeph>' and field
+                '<codeph>reason</codeph>' contains the error cause.</p>
+        <codeblock translate="no">{
+  "status": "failed",            
+  "reason": "Unknown memory type"        
+}</codeblock>
+        <p>After initiating the import process, monitor its status using the <xref
+                href="ProcessStatus.dita"/> method. On successful completion, the result will
+            contain the number of segments imported.</p>
+        <p>Example:</p>
+
+        <codeblock translate="no">{
+  "result": "Completed",
+  "data": {
+    "imported": "57678"
+  },
+  "status": "OK"
+}</codeblock>
     </body>
 </topic>

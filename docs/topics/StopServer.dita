@@ -6,5 +6,21 @@
         <p>End Point: <codeph>[TMEngine URL]/create</codeph></p>
         <p>Default: <codeph conref="ServerAPI.dita#ServerAPI/defaultUrl"
         /><codeph>stop</codeph></p>
+        
+        <p>Send a '<codeph>GET</codeph>' request to the method end point.</p>
+        <p>The server responds with a JSON object. On success, field
+            '<codeph>status</codeph>' is set to '<codeph>OK</codeph>'.</p>
+            <p>Example:</p>
+        <codeblock translate="no">{
+  "status": "OK"
+}</codeblock>
+        <p>On error, field '<codeph>status</codeph>' is set to '<codeph>failed</codeph>' and field
+            '<codeph>reason</codeph>' contains the error cause.</p>
+        
+        <p>Example:</p>
+        <codeblock translate="no">{
+  "status": "failed",            
+  "reason": "Error connecting to database"        
+}</codeblock>
     </body>
 </topic>

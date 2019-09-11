@@ -4,7 +4,37 @@
     <title>Open Memory</title>
     <body>
         <p>End Point: <codeph>[TMEngine URL]/create</codeph></p>
-        <p>Default: <codeph conref="ServerAPI.dita#ServerAPI/defaultUrl"
-        /><codeph>open</codeph></p>
+        <p>Default: <codeph conref="ServerAPI.dita#ServerAPI/defaultUrl"/><codeph>open</codeph></p>
+        <p>Send a '<codeph>POST</codeph>' request to the method end point with this parameters in a
+            JSON body:</p>
+        <simpletable>
+            <sthead>
+                <stentry>Field</stentry>
+                <stentry>Required</stentry>
+                <stentry>Content</stentry>
+            </sthead>
+            <strow>
+                <stentry><apiname>id</apiname></stentry>
+                <stentry>Yes</stentry>
+                <stentry>ID of the memory to open</stentry>
+            </strow>
+        </simpletable>
+        <p>Example:</p>
+        <codeblock translate="no">{
+  "id": "1568163112478"
+}</codeblock>
+        <p>The server responds with a JSON object. On success, field '<codeph>status</codeph>' is
+            set to '<codeph>OK</codeph>'.</p>
+        <codeblock translate="no">{
+  "status": "OK"
+}</codeblock>
+        <p>On error, field '<codeph>status</codeph>' is set to '<codeph>failed</codeph>' and field
+                '<codeph>reason</codeph>' contains the error cause.</p>
+
+        <p>Example:</p>
+        <codeblock translate="no">{
+  "status": "failed",            
+  "reason": "Unknown memory type"        
+}</codeblock>
     </body>
 </topic>

@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE topic PUBLIC "-//OASIS//DTD DITA Topic//EN" "topic.dtd">
 <topic id="ListEngines">
-    <title>List Memories</title>
-    <body>
-        <p>End Point: <codeph>[TMEngine URL]/list</codeph></p>
-        <p>Default: <codeph conref="ServerAPI.dita#ServerAPI/defaultUrl"
-        /><codeph>list</codeph></p>
-        
-        <p>Send a <codeph>GET</codeph> request to the method end point.</p>
-        <p>The server responds with a JSON object containing two fields. On success, field <codeph>status</codeph> is set to <codeph>OK</codeph> and field
-            <codeph>memories</codeph> contains an array with memory details.</p>
-        <codeblock translate="no">{
+  <title>List Memories</title>
+  <body>
+    <p>End Point: <codeph>[TMEngine URL]/list</codeph></p>
+    <p>Default: <codeph conref="ServerAPI.dita#ServerAPI/defaultUrl"/><codeph>list</codeph></p>
+
+    <p>Send a '<codeph>GET</codeph>' request to the method end point.</p>
+    <p>The server responds with a JSON object containing two fields. On success, field
+        '<codeph>status</codeph>' is set to '<codeph>OK</codeph>' and field
+        '<codeph>memories</codeph>' contains an array with memory details.</p>
+    <codeblock translate="no">{
   "memories": [
      {
        "owner": "rmraya",
@@ -31,13 +31,14 @@
   ],
   "status": "OK"
 }</codeblock>
-        
-        <p>On error, field <codeph>status</codeph> is set to <codeph>failed</codeph> and field <codeph>reason</codeph> contains the error cause.</p>
-        
-        <p>Example:</p>
-        <codeblock translate="no">{
+
+    <p>On error, field '<codeph>status</codeph>' is set to '<codeph>failed</codeph>' and field
+        '<codeph>reason</codeph>' contains the error cause.</p>
+
+    <p>Example:</p>
+    <codeblock translate="no">{
   "status": "failed",            
   "reason": "Error reading memories"        
 }</codeblock>
-    </body>
+  </body>
 </topic>
