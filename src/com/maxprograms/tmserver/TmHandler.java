@@ -114,7 +114,9 @@ public class TmHandler implements HttpHandler {
     private JSONObject processRequest(String url, String request) {
         JSONObject response = new JSONObject();
         try {
-            if ((prefix + "/stop").equals(url)) {
+            if (prefix.equals(url) || (prefix + "/").equals(url)) {
+                response = getVersion();
+            } else if ((prefix + "/stop").equals(url)) {
                 response = closeOpenEngines();
             } else if ((prefix + "/create").equals(url)) {
                 response = createMemory(request);
@@ -158,6 +160,13 @@ public class TmHandler implements HttpHandler {
         return response;
     }
 
+    private JSONObject getVersion() {
+        JSONObject result = new JSONObject();
+        result.put("version", Constants.VERSION);
+        result.put("build", Constants.BUILD);
+        return result;
+    }
+
     private JSONObject openMemory(String request) throws IOException {
         JSONObject result = new JSONObject();
         try {
@@ -196,7 +205,7 @@ public class TmHandler implements HttpHandler {
                 result.put("reason", "Wrong memory type");
             }
         } catch (IOException e) {
-            LOGGER.log(Level.ERROR, "Error reanaming memory", e);
+            LOGGER.log(Level.ERROR, "Error renaming memory", e);
             result.put("reason", e.getMessage());
         }
         return result;
