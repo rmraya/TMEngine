@@ -3,6 +3,8 @@
 <topic id="ConcordanceSearch">
     <title>Concordance Search</title>
     <body>
-        <p></p>
+        <p>End Point: <codeph>[TMEngine URL]/create</codeph></p>
+        <p>Default: <codeph conref="ServerAPI.dita#ServerAPI/defaultUrl"
+        /><codeph>concordance</codeph></p>
     </body>
 </topic>

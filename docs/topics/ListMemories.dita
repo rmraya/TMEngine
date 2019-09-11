@@ -3,6 +3,41 @@
 <topic id="ListEngines">
     <title>List Memories</title>
     <body>
-        <p></p>
+        <p>End Point: <codeph>[TMEngine URL]/list</codeph></p>
+        <p>Default: <codeph conref="ServerAPI.dita#ServerAPI/defaultUrl"
+        /><codeph>list</codeph></p>
+        
+        <p>Send a <codeph>GET</codeph> request to the method end point.</p>
+        <p>The server responds with a JSON object containing two fields. On success, field <codeph>status</codeph> is set to <codeph>OK</codeph> and field
+            <codeph>memories</codeph> contains an array with memory details.</p>
+        <codeblock translate="no">{
+  "memories": [
+     {
+       "owner": "rmraya",
+       "isOpen": false,
+       "name": "Fluenta Localization",
+       "id": "fluenta",
+       "type": "MapDbEngine",
+       "creationDate": "2019-09-10 21:54:13 UYT"
+     }, 
+     {
+       "owner": "rmraya",
+       "isOpen": false,
+       "name": "First Memory",
+       "id": "1568163112478",
+       "type": "MapDbEngine",
+       "creationDate": "2019-09-10 21:51:52 UYT"
+     }
+  ],
+  "status": "OK"
+}</codeblock>
+        
+        <p>On error, field <codeph>status</codeph> is set to <codeph>failed</codeph> and field <codeph>reason</codeph> contains the error cause.</p>
+        
+        <p>Example:</p>
+        <codeblock translate="no">{
+  "status": "failed",            
+  "reason": "Error reading memories"        
+}</codeblock>
     </body>
 </topic>

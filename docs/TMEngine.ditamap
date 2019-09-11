@@ -43,6 +43,7 @@
     <topicref href="topics/CreateMemory.dita"/>
     <topicref href="topics/ListMemories.dita"/>
     <topicref href="topics/OpenMemory.dita"/>
+    <topicref href="topics/ProcessStatus.dita"/>
     <topicref href="topics/CloseMemory.dita"/>
     <topicref href="topics/ImportTMX.dita"/>
     <topicref href="topics/ExportTMX.dita"/>

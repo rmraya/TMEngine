@@ -3,6 +3,8 @@
 <topic id="DeleteMemory">
     <title>Delete Memory</title>
     <body>
-        <p></p>
+        <p>End Point: <codeph>[TMEngine URL]/create</codeph></p>
+        <p>Default: <codeph conref="ServerAPI.dita#ServerAPI/defaultUrl"
+        /><codeph>delete</codeph></p>
     </body>
 </topic>

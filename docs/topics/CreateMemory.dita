@@ -4,7 +4,10 @@
     <title>Create Memory</title>
     <body>
         <p>End Point: <codeph>[TMEngine URL]/create</codeph></p>
-        <p>Send a <codeph>post</codeph> request to the method end point with these parameters in a JSON body:</p>
+        <p>Default: <codeph conref="ServerAPI.dita#ServerAPI/defaultUrl"
+            /><codeph>create</codeph></p>
+        
+        <p>Send a <codeph>POST</codeph> request to the method end point with these parameters in a JSON body:</p>
         <simpletable>
             <sthead>
                 <stentry>Field</stentry>
@@ -14,19 +17,20 @@
             <strow>
                 <stentry><apiname>id</apiname></stentry>
                 <stentry>No</stentry>
-                <stentry>ID of the memory to create. The value of ID must be unique. Default value is
-                    current server time represented as the number of milliseconds since January 1,
-                    1970, 00:00:00 GMT.</stentry>
+                <stentry>ID of the memory to create. The value of ID must be unique. Default value
+                    is current server time represented as the number of milliseconds since January
+                    1, 1970, 00:00:00 GMT</stentry>
             </strow>
             <strow>
                 <stentry><apiname>name</apiname></stentry>
                 <stentry>Yes</stentry>
-                <stentry/>
+                <stentry>A meaningful name to identify the memory</stentry>
             </strow>
             <strow>
                 <stentry><apiname>owner</apiname></stentry>
                 <stentry>No</stentry>
-                <stentry/>
+                <stentry>Text string used to identify the owner of the memory. Default value is the
+                    user name of the user running the server.</stentry>
             </strow>
             <strow>
                 <stentry><apiname>type</apiname></stentry>
@@ -38,8 +42,8 @@
         
         <p>Example:</p>
         <codeblock translate="no">{
-   "name": "First Memory",
-   "type": "MapDbEngine"
+  "name": "First Memory",
+  "type": "MapDbEngine"
 }</codeblock>
         
         <p>The server responds with a JSON object containing two fields.</p>
@@ -48,16 +52,16 @@
         
         <p>Example:</p>
         <codeblock translate="no">{
-   "status": "OK",            
-    "id": "1234567890987"        
+  "status": "OK",            
+  "id": "1234567890987"        
 }</codeblock>
         
         <p>On error, field <codeph>status</codeph> is set to <codeph>failed</codeph> and field <codeph>reason</codeph> contains the error cause.</p>
         
         <p>Example:</p>
         <codeblock translate="no">{
-   "status": "failed",            
-   "reason": "Duplicated id"        
+  "status": "failed",            
+  "reason": "Duplicated id"        
 }</codeblock>
     </body>
 </topic>

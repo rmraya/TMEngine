@@ -6,19 +6,20 @@
     <conbody>
         <p>The REST methods that TMEngine's server support are:</p>
         <ul>
-            <li><xref href="CreateMemory.dita">Create Memory</xref></li>
-            <li><xref href="ListMemories.dita">List Memories</xref></li>
-            <li><xref href="OpenMemory.dita">Open Memory</xref></li>
-            <li><xref href="CloseMemory.dita">Close Memory</xref></li>
-            <li><xref href="ImportTMX.dita">Import TMX File</xref></li>
-            <li><xref href="ExportTMX.dita">Export TMX File</xref></li>
-            <li><xref href="SearchTranslations.dita">Search Translations</xref></li>
-            <li><xref href="SearchTranslations.dita">Concordance Search</xref></li>
-            <li><xref href="RenameMemory.dita">Rename Memory</xref></li>
-            <li><xref href="DeleteMemory.dita">Delete Memory</xref></li>
-            <li><xref href="StopServer.dita">Stop Server</xref></li>
+            <li><xref href="CreateMemory.dita"></xref></li>
+            <li><xref href="ListMemories.dita"></xref></li>
+            <li><xref href="OpenMemory.dita"></xref></li>
+            <li><xref href="ProcessStatus.dita"/></li>
+            <li><xref href="CloseMemory.dita"></xref></li>
+            <li><xref href="ImportTMX.dita"></xref></li>
+            <li><xref href="ExportTMX.dita"></xref></li>
+            <li><xref href="SearchTranslations.dita"></xref></li>
+            <li><xref href="SearchTranslations.dita"></xref></li>
+            <li><xref href="RenameMemory.dita"></xref></li>
+            <li><xref href="DeleteMemory.dita"></xref></li>
+            <li><xref href="StopServer.dita"></xref></li>
         </ul>
-        <p>Default TMEngine URL is <codeph>http://localhost:8000/TMEngine</codeph>./</p>
+        <p>Default TMEngine URL is <codeph id="defaultUrl">http://localhost:8000/TMServer/</codeph>.</p>
         <note>It is possible to select a custom port for the server, passing the
                 <codeph>-port</codeph> parameter to the script used for launching it.</note>
         <p>All methods return a JSON object with a <codeph>status</codeph> field. Applications must

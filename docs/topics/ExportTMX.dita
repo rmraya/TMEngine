@@ -3,6 +3,8 @@
 <topic id="ExportTMX">
     <title>Export TMX File</title>
     <body>
-        <p></p>
+        <p>End Point: <codeph>[TMEngine URL]/create</codeph></p>
+        <p>Default: <codeph conref="ServerAPI.dita#ServerAPI/defaultUrl"
+        /><codeph>export</codeph></p>
     </body>
 </topic>

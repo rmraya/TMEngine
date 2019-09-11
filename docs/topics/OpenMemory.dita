@@ -3,6 +3,8 @@
 <topic id="OpenMemory">
     <title>Open Memory</title>
     <body>
-        <p></p>
+        <p>End Point: <codeph>[TMEngine URL]/create</codeph></p>
+        <p>Default: <codeph conref="ServerAPI.dita#ServerAPI/defaultUrl"
+        /><codeph>open</codeph></p>
     </body>
 </topic>

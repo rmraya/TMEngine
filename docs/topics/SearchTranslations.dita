@@ -3,6 +3,8 @@
 <topic id="SearchTranslations">
     <title>Search Translations</title>
     <body>
-        <p></p>
+        <p>End Point: <codeph>[TMEngine URL]/create</codeph></p>
+        <p>Default: <codeph conref="ServerAPI.dita#ServerAPI/defaultUrl"
+        /><codeph>search</codeph></p>
     </body>
 </topic>
