@@ -39,8 +39,8 @@
   "result": "Pending",
   "status": "OK"
 }</codeblock></li>
-            <li><b>Completed</b>: processing has finished. Process outcome is provided in the
-                    '<codeph>data</codeph>' field.
+            <li><b>Completed</b>: processing has finished. If the process produces any data, it is
+                placed in the '<codeph>data</codeph>' field.
                 <codeblock translate="no">{
   "result": "Completed",
   "data": {
@@ -57,7 +57,7 @@
 }</codeblock>
             </li>
         </ul>
-        <p>If the process cannot be checked, the server omits the '<codeph>result</codeph>' field
+        <p>If process status cannot be checked, the server omits the '<codeph>result</codeph>' field
             and provides a failure reason.</p>
         <codeblock translate="no">{
   "reason": "Missing 'process' parameter",

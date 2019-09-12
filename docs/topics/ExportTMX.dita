@@ -5,6 +5,77 @@
     <body>
         <p>End Point: <codeph>[TMEngine URL]/create</codeph></p>
         <p>Default: <codeph conref="ServerAPI.dita#ServerAPI/defaultUrl"
-        /><codeph>export</codeph></p>
+            /><codeph>export</codeph></p>
+
+        <p>Send a '<codeph>POST</codeph>' request to the method end point with these parameters in a
+            JSON body:</p>
+        <simpletable>
+            <sthead>
+                <stentry>Field</stentry>
+                <stentry>Required</stentry>
+                <stentry>Content</stentry>
+            </sthead>
+            <strow>
+                <stentry><apiname>id</apiname></stentry>
+                <stentry>Yes</stentry>
+                <stentry>ID of the memory to populate with TMX data</stentry>
+            </strow>
+            <strow>
+                <stentry><apiname>file</apiname></stentry>
+                <stentry>Yes</stentry>
+                <stentry>Path to the TMX file being created</stentry>
+            </strow>
+            <strow>
+                <stentry><apiname>langs</apiname></stentry>
+                <stentry>No</stentry>
+                <stentry>JSON array contaning the list of languages to export</stentry>
+            </strow>
+            <strow>
+                <stentry><apiname>srcLang</apiname></stentry>
+                <stentry>No</stentry>
+                <stentry>Language to set as source langage. The wildcard '<codeph>*all*</codeph>' is
+                    used by default</stentry>
+            </strow>
+            <strow>
+                <stentry><apiname>properties</apiname></stentry>
+                <stentry>No</stentry>
+                <stentry>JSON object with string properties to set in the exported file</stentry>
+            </strow>
+        </simpletable>
+        <p>Example:</p>
+        <codeblock translate="no">{
+  "id": "1568163112478",
+  "file": "/Volumes/Data/segments.tmx",
+  "langs": [
+      "en-US",
+       "ja",
+       "fr-FR",
+       "it"
+  ],
+  "srcLang": "en-US",
+  "properties": {
+    "project": "Milky Way",
+    "subject": "Astronomy Device"
+  }
+}</codeblock>
+
+        <p>The server responds with a JSON object containing two fields.</p>
+        <p>On success, field '<codeph>status</codeph>' is set to '<codeph>OK</codeph>' and field
+                '<codeph>process</codeph>' contains the ID of the background export process that was
+            initiated.</p>
+
+        <codeblock translate="no">{
+  "process": "1568222345643",
+  "status": "OK"
+}</codeblock>
+
+        <p>On error, field '<codeph>status</codeph>' is set to '<codeph>failed</codeph>' and field
+                '<codeph>reason</codeph>' contains the error cause.</p>
+        <codeblock translate="no">{
+  "status": "failed",            
+  "reason": "Unknown memory type"        
+}</codeblock>
+        <p>After starting the export process, monitor its status using the <xref
+                href="ProcessStatus.dita"/> method. </p>
     </body>
 </topic>
