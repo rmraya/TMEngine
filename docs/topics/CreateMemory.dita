@@ -39,6 +39,30 @@
                 <stentry>Type of engine to use. Possible values are: '<codeph>MapDbEngine</codeph>'
                     (default) and '<codeph>SQLEngine</codeph>'</stentry>
             </strow>
+            <strow>
+                <stentry><apiname>serverName</apiname></stentry>
+                <stentry>No</stentry>
+                <stentry>Required for <codeph>SQLEngine</codeph>. Name or IP of the server running
+                    MySQL or MariaDB</stentry>
+            </strow>
+            <strow>
+                <stentry><apiname>port</apiname></stentry>
+                <stentry>No</stentry>
+                <stentry>Required for <codeph>SQLEngine</codeph>. Port in which MySQL or MariaDB
+                    listens for requests</stentry>
+            </strow>
+            <strow>
+                <stentry><apiname>userName</apiname></stentry>
+                <stentry>No</stentry>
+                <stentry>Required for <codeph>SQLEngine</codeph>. ID of of the MySQL or MariaDB user
+                    creating the database</stentry>
+            </strow>
+            <strow>
+                <stentry><apiname>password</apiname></stentry>
+                <stentry>No</stentry>
+                <stentry>Required for <codeph>SQLEngine</codeph>. Password of the MySQL or MariaDB
+                    user creating the database</stentry>
+            </strow>
         </simpletable>
 
         <p>Example:</p>
@@ -47,6 +71,14 @@
   "type": "MapDbEngine"
 }</codeblock>
 
+        <codeblock translate="no">{
+  "name": "MariaMemory",
+  "type": "SQLEngine",
+  "serverName": "localhost",
+  "port": 3306,
+  "userName": "root",
+  "password": "secret123!"
+}</codeblock>
         <p>The server responds with a JSON object containing two fields.</p>
         <p>On success, field '<codeph>status</codeph>' is set to '<codeph>OK</codeph>' and field
                 '<codeph>id</codeph>' contains the ID assigned to the new memory.</p>
