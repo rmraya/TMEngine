@@ -2,4 +2,6 @@
 
 cd "$(dirname "$0")/"
 
-bin/java --module-path lib -m tmengine/com.maxprograms.tmserver.TmServer $@
+export CP="lib/mariadb-java-client-2.4.3.jar"
+
+bin/java -cp $CP --module-path lib com.maxprograms.tmserver.TmServer $@

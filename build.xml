@@ -52,5 +52,6 @@
     <target name="dist" depends="link,copyBats,copyShells">
         <description>Prepare distribution</description>
         <copy file="LICENSE" todir="dist"/>
+        <copy file="lib/mariadb-java-client-2.4.3.jar" todir="dist/lib"/>
     </target>
 </project>
