@@ -4,7 +4,7 @@
 
 An open source [Translation Memory](https://en.wikipedia.org/wiki/Translation_memory) Engine written in Java.
 
-Source code of TMEngine is available under [Eclipse Public License 1.0](https://www.eclipse.org/org/documents/epl-v10.html).
+TMEngine can be used either as an embedded library that manages translation memories in a Java application or as a standalone TM server via its REST API.
 
 ## Requirements
 
@@ -17,7 +17,11 @@ Source code of TMEngine is available under [Eclipse Public License 1.0](https://
 - Point your JAVA_HOME variable to JDK 11
 - Run `ant compile`.
 
-## How To
+## Standalone Server
+
+Use `tmserver.bat` or `tmserver.sh` to launch the TMEngine server.
+
+## Java Library 
 
 Interface `ITmEngine` provides the following methods needed by translation tools:
 
@@ -26,8 +30,7 @@ Interface `ITmEngine` provides the following methods needed by translation tools
 - `concordanceSearch()` - Search for appearances of a given string inside memory segments.
 - `exportMemory()` - Export the contents of a translation memory to a TMX file.
 
-
 Two classes implement interface `ITmEngine`:
 
 - `MapDbEngine` : a translation memory engine built using MapDB
-- `SQLEngine` : a translation memory designed to be used with MariaDB
+- `SQLEngine` : a translation memory designed to be used with [MariaDB](https://mariadb.org/) or [MySQL](https://www.mysql.com/)

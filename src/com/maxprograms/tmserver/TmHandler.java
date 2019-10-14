@@ -601,6 +601,12 @@ public class TmHandler implements HttpHandler {
                 engine = new MapDbEngine(json.getString("id"), getWorkFolder());
                 engine.close();
             } else if ("SQLEngine".equals(json.getString("type"))) {
+                if (!json.has("port")) {
+                    json.put("port", 3306);
+                }
+                if (!json.has("serverName")) {
+                    json.put("serverName", "localhost");
+                }
                 engine = new SQLEngine(json.getString("name"), json.getString("serverName"), json.getInt("port"),
                         json.getString("userName"), json.getString("password"));
                 engine.close();

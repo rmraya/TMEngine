@@ -9,7 +9,7 @@
 
         <p>Send a '<codeph>POST</codeph>' request to the method end point with these parameters in a
             JSON body:</p>
-        <simpletable>
+        <simpletable relcolwidth="1* 1* 4*">
             <sthead>
                 <stentry>Field</stentry>
                 <stentry>Required</stentry>
@@ -18,9 +18,11 @@
             <strow>
                 <stentry><apiname>id</apiname></stentry>
                 <stentry>No</stentry>
-                <stentry>ID of the memory to create. The value of ID must be unique. Default value
-                    is current server time represented as the number of milliseconds since January
-                    1, 1970, 00:00:00 GMT</stentry>
+                <stentry>
+                    <p>ID of the memory to create. The value of '<codeph>id</codeph>' must be unique.</p>
+                    <p>Default value is current server time represented as the number of
+                        milliseconds since January 1, 1970, 00:00:00 GMT</p>
+                </stentry>
             </strow>
             <strow>
                 <stentry><apiname>name</apiname></stentry>
@@ -30,38 +32,53 @@
             <strow>
                 <stentry><apiname>owner</apiname></stentry>
                 <stentry>No</stentry>
-                <stentry>Text string used to identify the owner of the memory. Default value is the
-                    user name of the user running the server.</stentry>
+                <stentry>
+                    <p>Text string used to identify the owner of the memory.</p>
+                    <p>Default value is the login name of the user running the server.</p>
+                </stentry>
             </strow>
             <strow>
                 <stentry><apiname>type</apiname></stentry>
                 <stentry>No</stentry>
-                <stentry>Type of engine to use. Possible values are: '<codeph>MapDbEngine</codeph>'
-                    (default) and '<codeph>SQLEngine</codeph>'</stentry>
+                <stentry>
+                    <p>Type of engine to use. Possible values are: <ul>
+                            <li>'<codeph>MapDbEngine</codeph>' (default)</li>
+                            <li>'<codeph>SQLEngine</codeph>'</li>
+                        </ul>
+                    </p>
+                </stentry>
             </strow>
             <strow>
                 <stentry><apiname>serverName</apiname></stentry>
                 <stentry>No</stentry>
-                <stentry>Required for <codeph>SQLEngine</codeph>. Name or IP of the server running
-                    MySQL or MariaDB</stentry>
+                <stentry>
+                    <p>Name or IP of the server running MySQL or MariaDB.</p>
+                    <p>Required for <codeph>SQLEngine</codeph>. Defaut value: '<codeph>localhost</codeph>'</p>
+                </stentry>
             </strow>
             <strow>
                 <stentry><apiname>port</apiname></stentry>
                 <stentry>No</stentry>
-                <stentry>Required for <codeph>SQLEngine</codeph>. Port in which MySQL or MariaDB
-                    listens for requests</stentry>
+                <stentry>
+                    <p>Port in which MySQL or MariaDB listens for requests.</p>
+                    <p>Required for <codeph>SQLEngine</codeph>. Default value: <codeph>3306</codeph></p>
+                </stentry>
             </strow>
             <strow>
                 <stentry><apiname>userName</apiname></stentry>
                 <stentry>No</stentry>
-                <stentry>Required for <codeph>SQLEngine</codeph>. ID of of the MySQL or MariaDB user
-                    creating the database</stentry>
+                <stentry>
+                    <p>ID of of the MySQL or MariaDB user creating the database.</p>
+                    <p>Required for <codeph>SQLEngine</codeph>.</p>
+                </stentry>
             </strow>
             <strow>
                 <stentry><apiname>password</apiname></stentry>
                 <stentry>No</stentry>
-                <stentry>Required for <codeph>SQLEngine</codeph>. Password of the MySQL or MariaDB
-                    user creating the database</stentry>
+                <stentry>
+                    <p>Password of the MySQL or MariaDB user creating the database.</p>
+                    <p>Required for <codeph>SQLEngine</codeph>.</p>
+                </stentry>
             </strow>
         </simpletable>
 
