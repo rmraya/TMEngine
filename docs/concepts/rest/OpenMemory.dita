@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE topic PUBLIC "-//OASIS//DTD DITA Topic//EN" "topic.dtd">
-<topic id="CloseMemory">
-    <title>Close Memory</title>
+<topic id="OpenMemory">
+    <title>Open Memory</title>
     <body>
         <p>End Point: <codeph>[TMEngine URL]/create</codeph></p>
-        <p>Default: <codeph conref="ServerAPI.dita#ServerAPI/defaultUrl"/><codeph>close</codeph></p>
+        <p>Default: <codeph conref="../ServerAPI.dita#ServerAPI/defaultUrl"/><codeph>open</codeph></p>
         <p>Send a '<codeph>POST</codeph>' request to the method end point with this parameters in a
             JSON body:</p>
         <simpletable>
@@ -16,7 +16,7 @@
             <strow>
                 <stentry><apiname>id</apiname></stentry>
                 <stentry>Yes</stentry>
-                <stentry>ID of the memory to close</stentry>
+                <stentry>ID of the memory to open</stentry>
             </strow>
         </simpletable>
         <p>Example:</p>
@@ -34,7 +34,7 @@
         <p>Example:</p>
         <codeblock translate="no">{
   "status": "failed",            
-  "reason": "Unknown memory"        
+  "reason": "Unknown memory type"        
 }</codeblock>
     </body>
 </topic>

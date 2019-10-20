@@ -4,7 +4,7 @@
   <title>List Memories</title>
   <body>
     <p>End Point: <codeph>[TMEngine URL]/list</codeph></p>
-    <p>Default: <codeph conref="ServerAPI.dita#ServerAPI/defaultUrl"/><codeph>list</codeph></p>
+    <p>Default: <codeph conref="../ServerAPI.dita#ServerAPI/defaultUrl"/><codeph>list</codeph></p>
 
     <p>Send a '<codeph>GET</codeph>' request to the method end point.</p>
     <p>The server responds with a JSON object containing two fields. On success, field

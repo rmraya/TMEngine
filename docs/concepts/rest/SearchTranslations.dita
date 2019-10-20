@@ -4,7 +4,7 @@
     <title>Search Translations</title>
     <body>
         <p>End Point: <codeph>[TMEngine URL]/create</codeph></p>
-        <p>Default: <codeph conref="ServerAPI.dita#ServerAPI/defaultUrl"
+        <p>Default: <codeph conref="../ServerAPI.dita#ServerAPI/defaultUrl"
         /><codeph>search</codeph></p>
     </body>
 </topic>

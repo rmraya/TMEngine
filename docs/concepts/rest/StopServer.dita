@@ -4,7 +4,7 @@
     <title>Stop Server</title>
     <body>
         <p>End Point: <codeph>[TMEngine URL]/create</codeph></p>
-        <p>Default: <codeph conref="ServerAPI.dita#ServerAPI/defaultUrl"
+        <p>Default: <codeph conref="../ServerAPI.dita#ServerAPI/defaultUrl"
         /><codeph>stop</codeph></p>
         
         <p>Send a '<codeph>GET</codeph>' request to the method end point.</p>

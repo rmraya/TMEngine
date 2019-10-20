@@ -6,18 +6,18 @@
     <conbody>
         <p>The REST methods that TMEngine's server supports are:</p>
         <ul>
-            <li><xref href="CreateMemory.dita"></xref></li>
-            <li><xref href="ListMemories.dita"></xref></li>
-            <li><xref href="OpenMemory.dita"></xref></li>
-            <li><xref href="CloseMemory.dita"></xref></li>
-            <li><xref href="ImportTMX.dita"></xref></li>
-            <li><xref href="ProcessStatus.dita"/></li>
-            <li><xref href="ExportTMX.dita"></xref></li>
-            <li><xref href="SearchTranslations.dita"></xref></li>
-            <li><xref href="SearchTranslations.dita"></xref></li>
-            <li><xref href="RenameMemory.dita"></xref></li>
-            <li><xref href="DeleteMemory.dita"></xref></li>
-            <li><xref href="StopServer.dita"></xref></li>
+            <li><xref href="rest/CreateMemory.dita"></xref></li>
+            <li><xref href="rest/ListMemories.dita"></xref></li>
+            <li><xref href="rest/OpenMemory.dita"></xref></li>
+            <li><xref href="rest/CloseMemory.dita"></xref></li>
+            <li><xref href="rest/ImportTMX.dita"></xref></li>
+            <li><xref href="rest/ProcessStatus.dita"/></li>
+            <li><xref href="rest/ExportTMX.dita"></xref></li>
+            <li><xref href="rest/SearchTranslations.dita"></xref></li>
+            <li><xref href="rest/ConcordanceSearch.dita"></xref></li>
+            <li><xref href="rest/RenameMemory.dita"></xref></li>
+            <li><xref href="rest/DeleteMemory.dita"></xref></li>
+            <li><xref href="rest/StopServer.dita"></xref></li>
         </ul>
         <p>Default TMEngine URL is '<codeph id="defaultUrl">http://localhost:8000/TMServer/</codeph>'.</p>
         <note>It is possible to select a custom port for the server, passing the

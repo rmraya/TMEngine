@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE topic PUBLIC "-//OASIS//DTD DITA Topic//EN" "topic.dtd">
-<topic id="ExportTMX">
-    <title>Export TMX File</title>
+<topic id="ImportTMX">
+    <title>Import TMX File</title>
     <body>
-        <p>End Point: <codeph>[TMEngine URL]/create</codeph></p>
-        <p>Default: <codeph conref="ServerAPI.dita#ServerAPI/defaultUrl"
-            /><codeph>export</codeph></p>
-
+        <p>End Point: <codeph>[TMEngine URL]/import</codeph></p>
+        <p>Default: <codeph conref="../ServerAPI.dita#ServerAPI/defaultUrl"
+            /><codeph>import</codeph></p>
         <p>Send a '<codeph>POST</codeph>' request to the method end point with these parameters in a
             JSON body:</p>
         <simpletable>
@@ -23,45 +22,35 @@
             <strow>
                 <stentry><apiname>file</apiname></stentry>
                 <stentry>Yes</stentry>
-                <stentry>Path to the TMX file being created</stentry>
+                <stentry>Path to the TMX file being imported</stentry>
             </strow>
             <strow>
-                <stentry><apiname>langs</apiname></stentry>
+                <stentry><apiname>subject</apiname></stentry>
                 <stentry>No</stentry>
-                <stentry>JSON array contaning the list of languages to export</stentry>
+                <stentry>Name or identifier of the subject associated with the TMX file</stentry>
             </strow>
             <strow>
-                <stentry><apiname>srcLang</apiname></stentry>
+                <stentry><apiname>client</apiname></stentry>
                 <stentry>No</stentry>
-                <stentry>Language to set as source langage. The wildcard '<codeph>*all*</codeph>' is
-                    used by default</stentry>
+                <stentry>Name or identifier of the client associated with the TMX file</stentry>
             </strow>
             <strow>
-                <stentry><apiname>properties</apiname></stentry>
+                <stentry><apiname>project</apiname></stentry>
                 <stentry>No</stentry>
-                <stentry>JSON object with string properties to set in the exported file</stentry>
+                <stentry>Name or identifier of the project associated with the TMX file</stentry>
             </strow>
         </simpletable>
+
         <p>Example:</p>
         <codeblock translate="no">{
   "id": "1568163112478",
   "file": "/Volumes/Data/segments.tmx",
-  "langs": [
-      "en-US",
-       "ja",
-       "fr-FR",
-       "it"
-  ],
-  "srcLang": "en-US",
-  "properties": {
-    "project": "Milky Way",
-    "subject": "Astronomy Device"
-  }
+  "project": "Main TM"
 }</codeblock>
 
         <p>The server responds with a JSON object containing two fields.</p>
         <p>On success, field '<codeph>status</codeph>' is set to '<codeph>OK</codeph>' and field
-                '<codeph>process</codeph>' contains the ID of the background export process that was
+                '<codeph>process</codeph>' contains the ID of the background import process that was
             initiated.</p>
 
         <codeblock translate="no">{
@@ -75,7 +64,17 @@
   "status": "failed",            
   "reason": "Unknown memory type"        
 }</codeblock>
-        <p>After starting the export process, monitor its status using the <xref
-                href="ProcessStatus.dita"/> method. </p>
+        <p>After starting the import process, monitor its status using the <xref
+                href="../../topics/ProcessStatus.dita"/> method. On successful completion, the result will
+            contain the number of segments imported.</p>
+        <p>Example:</p>
+
+        <codeblock translate="no">{
+  "result": "Completed",
+  "data": {
+    "imported": "57678"
+  },
+  "status": "OK"
+}</codeblock>
     </body>
 </topic>

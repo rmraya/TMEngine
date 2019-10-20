@@ -63,7 +63,7 @@ public class TmServer implements IServer {
         String help = "Usage:\n\n" + launcher + "[-help] [-version] [-port portNumber]\n\n" + "  Where:\n\n"
                 + "   -help:      (optional) Display this help information and exit\n"
                 + "   -version:   (optional) Display version & build information and exit\n"
-                + "   -port:      (optional) Port for running HTTP or HTTPS server. Default is 8000\n";
+                + "   -port:      (optional) Port for running HTTP server. Default is 8000\n";
         System.out.println(help);
     }
 

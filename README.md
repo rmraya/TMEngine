@@ -21,7 +21,7 @@ TMEngine can be used either as an embedded library that manages translation memo
 
 Use `tmserver.bat` or `tmserver.sh` to launch the TMEngine server.
 
-## Java Library 
+## Java Library
 
 Interface `ITmEngine` provides the following methods needed by translation tools:
 

@@ -4,7 +4,7 @@
     <title>Create Memory</title>
     <body>
         <p>End Point: <codeph>[TMEngine URL]/create</codeph></p>
-        <p>Default: <codeph conref="ServerAPI.dita#ServerAPI/defaultUrl"
+        <p>Default: <codeph conref="../ServerAPI.dita#ServerAPI/defaultUrl"
             /><codeph>create</codeph></p>
 
         <p>Send a '<codeph>POST</codeph>' request to the method end point with these parameters in a

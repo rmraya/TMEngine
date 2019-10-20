@@ -33,24 +33,28 @@
     </booklists>
   </frontmatter>
   <chapter navtitle="Overview">
-    <topicref href="topics/TMEngine.dita"/>
+    <topicref href="concepts/TMEngine.dita"/>
+  </chapter>
+  
+  <chapter navtitle="Running as a Standalone Server">
+    <topicref href="concepts/Server.dita"/>
+    <topicref href="concepts/ServerAPI.dita">
+    <topicref href="concepts/rest/CreateMemory.dita"/>
+    <topicref href="concepts/rest/ListMemories.dita"/>
+    <topicref href="concepts/rest/OpenMemory.dita"/>
+    <topicref href="concepts/rest/CloseMemory.dita"/>
+    <topicref href="concepts/rest/ImportTMX.dita"/>
+    <topicref href="concepts/rest/ProcessStatus.dita"/>
+    <topicref href="concepts/rest/ExportTMX.dita"/>
+    <topicref href="concepts/rest/SearchTranslations.dita"/>
+    <topicref href="concepts/rest/ConcordanceSearch.dita"/>
+    <topicref href="concepts/rest/RenameMemory.dita"/>
+    <topicref href="concepts/rest/DeleteMemory.dita"/>
+    <topicref href="concepts/rest/StopServer.dita"/>
+    </topicref>
   </chapter>
   <chapter navtitle="Java Library">
     
   </chapter>
-  <chapter navtitle="REST API">
-    <topicref href="topics/ServerAPI.dita"></topicref>
-    <topicref href="topics/CreateMemory.dita"/>
-    <topicref href="topics/ListMemories.dita"/>
-    <topicref href="topics/OpenMemory.dita"/>
-    <topicref href="topics/CloseMemory.dita"/>
-    <topicref href="topics/ImportTMX.dita"/>
-    <topicref href="topics/ProcessStatus.dita"/>
-    <topicref href="topics/ExportTMX.dita"/>
-    <topicref href="topics/SearchTranslations.dita"/>
-    <topicref href="topics/ConcordanceSearch.dita"/>
-    <topicref href="topics/RenameMemory.dita"/>
-    <topicref href="topics/DeleteMemory.dita"/>
-    <topicref href="topics/StopServer.dita"/>
-  </chapter>
+  
 </bookmap>
