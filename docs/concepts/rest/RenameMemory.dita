@@ -3,8 +3,51 @@
 <topic id="RenameMemory">
     <title>Rename Memory</title>
     <body>
-        <p>End Point: <codeph>[TMEngine URL]/create</codeph></p>
+        <p>End Point: <codeph>[TMEngine URL]/rename</codeph></p>
         <p>Default: <codeph conref="../ServerAPI.dita#ServerAPI/defaultUrl"
-        /><codeph>rename</codeph></p>
+            /><codeph>rename</codeph></p>
+        <p>Send a '<codeph>POST</codeph>' request to the method end point with these parameters in a
+            JSON body:</p>
+        <simpletable relcolwidth="1* 1* 4*">
+            <sthead>
+                <stentry>Field</stentry>
+                <stentry>Required</stentry>
+                <stentry>Content</stentry>
+            </sthead>
+            <strow>
+                <stentry><apiname>id</apiname></stentry>
+                <stentry>Yes</stentry>
+                <stentry>
+                    <p>ID of the memory to rename</p>
+                </stentry>
+            </strow>
+            <strow>
+                <stentry><apiname>name</apiname></stentry>
+                <stentry>Yes</stentry>
+                <stentry>New name for the memory</stentry>
+            </strow>
+        </simpletable>
+        <note>Only memories of type '<codeph>MapDbEngine</codeph>' can be renamed.</note>
+        <p>Example:</p>
+        <codeblock translate="no">{
+  "id": "1568163112478",
+  "name": "Updated Memory Name"
+}</codeblock>
+        <p>The server responds with a JSON object containing two fields.</p>
+        <p>On success, field '<codeph>status</codeph>' is set to '<codeph>OK</codeph>'.</p>
+
+        <p>Example:</p>
+        <codeblock translate="no">{
+  "status": "OK"       
+}</codeblock>
+
+        <p>On error, field '<codeph>status</codeph>' is set to '<codeph>failed</codeph>' and field
+                '<codeph>reason</codeph>' contains the error cause.</p>
+
+        <p>Example:</p>
+        <codeblock translate="no">{
+  "status": "failed",            
+  "reason": "Wrong memory type"        
+}</codeblock>
     </body>
 </topic>

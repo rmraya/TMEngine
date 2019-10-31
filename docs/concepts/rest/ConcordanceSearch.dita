@@ -5,7 +5,7 @@
     <body>
         <p>End Point: <codeph>[TMEngine URL]/concordance</codeph></p>
         <p>Default: <codeph conref="../ServerAPI.dita#ServerAPI/defaultUrl"
-        /><codeph>concordance</codeph></p>
+                /><codeph>concordance</codeph></p>
         <p>Send a '<codeph>POST</codeph>' request to the method end point with these parameters in a
             JSON body:</p>
         <simpletable relcolwidth="1* 1* 4*">
@@ -18,42 +18,78 @@
                 <stentry><apiname>id</apiname></stentry>
                 <stentry>yes</stentry>
                 <stentry>
-                    <p>ID of the memory where the search should be performed. </p>
+                    <p>ID of the memory where the search should be performed</p>
                 </stentry>
             </strow>
             <strow>
                 <stentry><apiname>text</apiname></stentry>
                 <stentry>Yes</stentry>
-                <stentry>Text string to search.</stentry>
+                <stentry>Text string to search</stentry>
             </strow>
             <strow>
                 <stentry><apiname>srcLang</apiname></stentry>
                 <stentry>Yes</stentry>
-                <stentry>Source language code.</stentry>
-            </strow>
-            <strow>
-                <stentry><apiname>tgtLang</apiname></stentry>
-                <stentry>Yes</stentry>
-                <stentry>Target language code.</stentry>
+                <stentry>Source language code</stentry>
             </strow>
             <strow>
                 <stentry><apiname>limit</apiname></stentry>
                 <stentry>Yes</stentry>
-                <stentry>Integer value indicating the maximum number of matches to
-                    include.</stentry>
+                <stentry>Integer value indicating the maximum number of matches to include</stentry>
             </strow>
             <strow>
                 <stentry><apiname>isRegexp</apiname></stentry>
                 <stentry>Yes</stentry>
-                <stentry>Boolean value indicationg wether the search text should be treated as a regular expression.</stentry>
+                <stentry>Boolean value indicationg wether the search text should be treated as a
+                    regular expression</stentry>
             </strow>
             <strow>
                 <stentry><apiname>caseSensitive</apiname></stentry>
                 <stentry>Yes</stentry>
                 <stentry>Boolean value indicating whether the search should be case sensitive or
-                    not.</stentry>
+                    not</stentry>
             </strow>
         </simpletable>
         <p>Example:</p>
+        <codeblock>{
+  "id": "fluenta",
+  "text": "segment",
+  "srcLang": "en",
+  "limit": 5,
+  "isRegexp": false,
+  "caseSensitive": true
+}</codeblock>
+        <p>On success, field '<codeph>status</codeph>' is set to '<codeph>OK</codeph>' and field
+                '<codeph>process</codeph>' contains the ID of the background import process that was
+            initiated.</p>
+
+        <codeblock translate="no">{
+  "process": "1572531573026",
+  "status": "OK"
+}</codeblock>
+
+        <p>On error, field '<codeph>status</codeph>' is set to '<codeph>failed</codeph>' and field
+                '<codeph>reason</codeph>' contains the error cause.</p>
+        <codeblock translate="no">{
+  "status": "failed",            
+  "reason": "Unknown memory type"        
+}</codeblock>
+        <p>After starting the import process, monitor its status using the <xref
+                href="ProcessStatus.dita"/> method. </p>
+        <p>On successful completion, the result will contain an array of  &lt;tu> elements that
+            contain the searched text in the <codeph>data</codeph> field.</p>
+        <p>Example:</p>
+        <codeblock>{
+  "result": "Completed",
+  "data": {
+    "entries": [
+      "&lt;tu creationid="rmraya" creationdate="20161225T150949Z" creationtool="Swordfish" 
+      creationtoolversion="3.3-8" tuid="-1247472893-0-1586928971">
+      &lt;prop type="project">Fluenta&lt;/prop>
+      &lt;tuv xml:lang="es">&lt;seg>Hay segmentos con errores de etiquetas.&lt;/seg>&lt;/tuv>
+      &lt;tuv xml:lang="en">&lt;seg>There are segments with tag errors.&lt;/seg>&lt;/tuv>&lt;/tu>"
+    ],
+  },
+  "status": "OK"
+}           </codeblock>
     </body>
 </topic>

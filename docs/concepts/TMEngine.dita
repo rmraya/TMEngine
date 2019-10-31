@@ -11,5 +11,12 @@
             <li>As an embedded library that manages translation memories in a Java application;</li>
             <li>As a standalone TM server via its REST API.</li>
         </ul>
+        <p>The standalone server runs on these platforms:</p>
+        <ul>
+            <li>Microsoft Windows 8, 1.1 and 10</li>
+            <li>macOS 10.13, 10.14 and 10.15</li>
+            <li>Linux (any version capable of running Java 11)</li>
+        </ul>
+        <p>The .jar files included in TMEngine distributions are compiled with Java 11.</p> 
     </conbody>
 </concept>

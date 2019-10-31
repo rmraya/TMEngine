@@ -332,7 +332,11 @@ public class TmHandler implements HttpHandler {
                 }
                 JSONObject obj = new JSONObject();
                 JSONArray array = new JSONArray();
-                array.put(openEngines.get(id).getAllLanguages());
+                Set<String> langs = openEngines.get(id).getAllLanguages();
+                Iterator<String> it = langs.iterator();
+                while (it.hasNext()) {
+                    array.put(it.next());
+                }
                 obj.put("languages", array);
                 if (shouldClose) {
                     close(id);

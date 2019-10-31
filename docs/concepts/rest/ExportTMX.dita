@@ -42,6 +42,8 @@
                 <stentry>JSON object with string properties to set in the exported file</stentry>
             </strow>
         </simpletable>
+        <note>when exporting a TMX file on a remote server, make sure the TMEngine server has access
+            to the specified location.</note>
         <p>Example:</p>
         <codeblock translate="no">{
   "id": "1568163112478",

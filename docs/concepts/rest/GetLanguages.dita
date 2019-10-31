@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept PUBLIC "-//OASIS//DTD DITA Concept//EN" "concept.dtd">
+<concept id="GetLanguages">
+    <title>Get Languages</title>
+    <conbody>
+        <p>End Point: <codeph>[TMEngine URL]/languages</codeph></p>
+        <p>Default: <codeph conref="../ServerAPI.dita#ServerAPI/defaultUrl"
+            /><codeph>languages</codeph></p>
+        <p>Send a '<codeph>POST</codeph>' request to the method end point with this parameter in a
+            JSON body:</p>
+        <simpletable>
+            <sthead>
+                <stentry>Field</stentry>
+                <stentry>Required</stentry>
+                <stentry>Content</stentry>
+            </sthead>
+            <strow>
+                <stentry><apiname>id</apiname></stentry>
+                <stentry>Yes</stentry>
+                <stentry>ID of the memory to query</stentry>
+            </strow>
+        </simpletable>
+        <p>Example:</p>
+        <codeblock translate="no">{
+  "id": "1568163112456"
+}</codeblock>
+        <p>The server responds with a JSON object containing two fields.</p>
+        <p>On success, field '<codeph>status</codeph>' is set to '<codeph>OK</codeph>' and field
+                '<codeph>process</codeph>' contains the ID of the background query process that was
+            initiated.</p>
+
+        <codeblock translate="no">{
+  "process": "1568222345683",
+  "status": "OK"
+}</codeblock>
+
+        <p>On error, field '<codeph>status</codeph>' is set to '<codeph>failed</codeph>' and field
+                '<codeph>reason</codeph>' contains the error cause.</p>
+        <codeblock translate="no">{
+  "status": "failed",            
+  "reason": "Unknown memory type"        
+}</codeblock>
+        <p>After starting the query process, monitor its status using the <xref
+                href="ProcessStatus.dita"/> method. On successful completion, the
+                <codeph>data</codeph> field will contain a list of languages present in the
+            memory.</p>
+        <p>Example:</p>
+        <codeblock>{
+  "result": "Completed",
+  "data": {
+    "languages": [ "es", "en" ]
+  },
+  "status": "OK"
+}</codeblock>
+    </conbody>
+</concept>

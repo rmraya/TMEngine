@@ -41,6 +41,9 @@
             </strow>
         </simpletable>
 
+        <note>The TMEngine server must have access to the TMX file being imported. When importing a
+            TMX file into a remote server, copy or upload the file to the server first and supply
+            the right path in the JSON body.</note>
         <p>Example:</p>
         <codeblock translate="no">{
   "id": "1568163112478",

@@ -3,7 +3,7 @@
 <topic id="ProcessStatus">
     <title>Process Status</title>
     <body>
-        <p>End Point: <codeph>[TMEngine URL]/create</codeph></p>
+        <p>End Point: <codeph>[TMEngine URL]/status</codeph></p>
         <p>Default: <codeph conref="../ServerAPI.dita#ServerAPI/defaultUrl"
             /><codeph>status</codeph></p>
 

@@ -18,35 +18,35 @@
                 <stentry><apiname>id</apiname></stentry>
                 <stentry>yes</stentry>
                 <stentry>
-                    <p>ID of the memory where the search should be performed. </p>
+                    <p>ID of the memory where the search should be performed</p>
                 </stentry>
             </strow>
             <strow>
                 <stentry><apiname>text</apiname></stentry>
                 <stentry>Yes</stentry>
-                <stentry>Text string to search.</stentry>
+                <stentry>Text string to search</stentry>
             </strow>
             <strow>
                 <stentry><apiname>srcLang</apiname></stentry>
                 <stentry>Yes</stentry>
-                <stentry>Source language code.</stentry>
+                <stentry>Source language code</stentry>
             </strow>
             <strow>
                 <stentry><apiname>tgtLang</apiname></stentry>
                 <stentry>Yes</stentry>
-                <stentry>Target language code.</stentry>
+                <stentry>Target language code</stentry>
             </strow>
             <strow>
                 <stentry><apiname>similarity</apiname></stentry>
                 <stentry>Yes</stentry>
                 <stentry>Integer value indicating the lowest similarity percentage to include in
-                    results.</stentry>
+                    results</stentry>
             </strow>
             <strow>
                 <stentry><apiname>caseSensitive</apiname></stentry>
                 <stentry>Yes</stentry>
                 <stentry>Boolean value indicating whether the search should be case sensitive or
-                    not.</stentry>
+                    not</stentry>
             </strow>
         </simpletable>
         <p>Example:</p>
@@ -101,8 +101,7 @@
           "lastusagedate": "20070126T082848Z",
           "customer": "ACME Auditors"
         }
-      }, 
-      {
+      }, {
         "similarity": 73,
         "origin": "1572538708492",
         "source": "&lt;tuv xml:lang="en-GB">&lt;seg>Legal Compliance&lt;/seg>&lt;/tuv>",
@@ -120,8 +119,7 @@
           "lastusagedate": "20160727T093143Z",
           "customer": "ACME Auditors"
         }
-      }, 
-      {
+      }, {
         "similarity": 100,
         "origin": "fluenta",
         "source": "&lt;tuv xml:lang="en-GB">&lt;seg>tax compliance&lt;/seg>&lt;/tuv>",

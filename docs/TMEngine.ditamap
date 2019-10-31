@@ -4,29 +4,12 @@
 <bookmap xml:lang="en-US">
   <booktitle>
     <mainbooktitle> TMEngine</mainbooktitle>
-    <booktitlealt>An Open Source Translation Memory Manager</booktitlealt>
+    <booktitlealt>An Open Source Translation Memory Manager <image href="images/tmengine.png"
+        placement="break" align="center"/>
+      Copyright (c) 2003 - 2019 Maxprograms
+      
+    </booktitlealt>
   </booktitle>
-  <bookmeta>
-    <author>Rodolfo M. Raya</author>
-    <authorinformation>
-      <personinfo>
-        <emailaddresses>
-          <emailaddress>rmraya@maxprograms.com</emailaddress>
-        </emailaddresses>
-      </personinfo>
-      <organizationinfo>
-        <namedetails>
-          <organizationnamedetails>
-            <organizationname>Maxprograms</organizationname>
-          </organizationnamedetails>
-        </namedetails>
-
-        <urls>
-          <url>https://www.maxprograms.com</url>
-        </urls>
-      </organizationinfo>
-    </authorinformation>
-  </bookmeta>
   <frontmatter>
     <booklists>
       <toc/>
@@ -43,6 +26,7 @@
     <topicref href="concepts/rest/ListMemories.dita"/>
     <topicref href="concepts/rest/OpenMemory.dita"/>
     <topicref href="concepts/rest/CloseMemory.dita"/>
+    <topicref href="concepts/rest/GetLanguages.dita"/>
     <topicref href="concepts/rest/ImportTMX.dita"/>
     <topicref href="concepts/rest/ProcessStatus.dita"/>
     <topicref href="concepts/rest/ExportTMX.dita"/>
