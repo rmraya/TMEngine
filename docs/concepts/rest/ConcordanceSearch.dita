@@ -3,8 +3,57 @@
 <topic id="ConcordanceSearch">
     <title>Concordance Search</title>
     <body>
-        <p>End Point: <codeph>[TMEngine URL]/create</codeph></p>
+        <p>End Point: <codeph>[TMEngine URL]/concordance</codeph></p>
         <p>Default: <codeph conref="../ServerAPI.dita#ServerAPI/defaultUrl"
         /><codeph>concordance</codeph></p>
+        <p>Send a '<codeph>POST</codeph>' request to the method end point with these parameters in a
+            JSON body:</p>
+        <simpletable relcolwidth="1* 1* 4*">
+            <sthead>
+                <stentry>Field</stentry>
+                <stentry>Required</stentry>
+                <stentry>Content</stentry>
+            </sthead>
+            <strow>
+                <stentry><apiname>id</apiname></stentry>
+                <stentry>yes</stentry>
+                <stentry>
+                    <p>ID of the memory where the search should be performed. </p>
+                </stentry>
+            </strow>
+            <strow>
+                <stentry><apiname>text</apiname></stentry>
+                <stentry>Yes</stentry>
+                <stentry>Text string to search.</stentry>
+            </strow>
+            <strow>
+                <stentry><apiname>srcLang</apiname></stentry>
+                <stentry>Yes</stentry>
+                <stentry>Source language code.</stentry>
+            </strow>
+            <strow>
+                <stentry><apiname>tgtLang</apiname></stentry>
+                <stentry>Yes</stentry>
+                <stentry>Target language code.</stentry>
+            </strow>
+            <strow>
+                <stentry><apiname>limit</apiname></stentry>
+                <stentry>Yes</stentry>
+                <stentry>Integer value indicating the maximum number of matches to
+                    include.</stentry>
+            </strow>
+            <strow>
+                <stentry><apiname>isRegexp</apiname></stentry>
+                <stentry>Yes</stentry>
+                <stentry>Boolean value indicationg wether the search text should be treated as a regular expression.</stentry>
+            </strow>
+            <strow>
+                <stentry><apiname>caseSensitive</apiname></stentry>
+                <stentry>Yes</stentry>
+                <stentry>Boolean value indicating whether the search should be case sensitive or
+                    not.</stentry>
+            </strow>
+        </simpletable>
+        <p>Example:</p>
     </body>
 </topic>

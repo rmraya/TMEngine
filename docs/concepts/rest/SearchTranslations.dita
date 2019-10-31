@@ -5,6 +5,145 @@
     <body>
         <p>End Point: <codeph>[TMEngine URL]/create</codeph></p>
         <p>Default: <codeph conref="../ServerAPI.dita#ServerAPI/defaultUrl"
-        /><codeph>search</codeph></p>
+            /><codeph>search</codeph></p>
+        <p>Send a '<codeph>POST</codeph>' request to the method end point with these parameters in a
+            JSON body:</p>
+        <simpletable relcolwidth="1* 1* 4*">
+            <sthead>
+                <stentry>Field</stentry>
+                <stentry>Required</stentry>
+                <stentry>Content</stentry>
+            </sthead>
+            <strow>
+                <stentry><apiname>id</apiname></stentry>
+                <stentry>yes</stentry>
+                <stentry>
+                    <p>ID of the memory where the search should be performed. </p>
+                </stentry>
+            </strow>
+            <strow>
+                <stentry><apiname>text</apiname></stentry>
+                <stentry>Yes</stentry>
+                <stentry>Text string to search.</stentry>
+            </strow>
+            <strow>
+                <stentry><apiname>srcLang</apiname></stentry>
+                <stentry>Yes</stentry>
+                <stentry>Source language code.</stentry>
+            </strow>
+            <strow>
+                <stentry><apiname>tgtLang</apiname></stentry>
+                <stentry>Yes</stentry>
+                <stentry>Target language code.</stentry>
+            </strow>
+            <strow>
+                <stentry><apiname>similarity</apiname></stentry>
+                <stentry>Yes</stentry>
+                <stentry>Integer value indicating the lowest similarity percentage to include in
+                    results.</stentry>
+            </strow>
+            <strow>
+                <stentry><apiname>caseSensitive</apiname></stentry>
+                <stentry>Yes</stentry>
+                <stentry>Boolean value indicating whether the search should be case sensitive or
+                    not.</stentry>
+            </strow>
+        </simpletable>
+        <p>Example:</p>
+        <codeblock>{
+  "id": "1572538708492",
+  "text": "tax compliance",
+  "srcLang": "en-GB",
+  "tgtLang": "fr-FR",
+  "similarity": 70,
+  "caseSensitive": false
+}</codeblock>
+        <p>The server responds with a JSON object containing two fields.</p>
+        <p>On success, field '<codeph>status</codeph>' is set to '<codeph>OK</codeph>' and field
+                '<codeph>process</codeph>' contains the ID of the background import process that was
+            initiated.</p>
+
+        <codeblock translate="no">{
+  "process": "1572531573026",
+  "status": "OK"
+}</codeblock>
+
+        <p>On error, field '<codeph>status</codeph>' is set to '<codeph>failed</codeph>' and field
+                '<codeph>reason</codeph>' contains the error cause.</p>
+        <codeblock translate="no">{
+  "status": "failed",            
+  "reason": "Unknown memory type"        
+}</codeblock>
+        <p>After starting the import process, monitor its status using the <xref
+                href="ProcessStatus.dita"/> method. </p>
+        <p>On successful completion, the result will contain an array of similar segments in the
+                <codeph>data</codeph> field.</p>
+        <p>Example:</p>
+
+        <codeblock translate="no">{
+  "result": "Completed",
+  "data": {
+    "matches": [
+      {
+        "similarity": 71,
+        "origin": "1572538708492",
+        "source": "&lt;tuv xml:lang="en-GB">&lt;seg>Non-compliance&lt;/seg>&lt;/tuv>",
+        "target": "&lt;tuv xml:lang="fr-FR">&lt;seg>Violation&lt;/seg>&lt;/tuv>",
+        "properties": {
+          "creationdate": "20070126T082848Z",
+          "subject": "Taxes",
+          "x-Origin": "TM",
+          "project": "Main TM",
+          "changedate": "20070126T082848Z",
+          "tuid": "1546700322331",
+          "creationid": "MC",
+          "changeid": "MC",
+          "lastusagedate": "20070126T082848Z",
+          "customer": "ACME Auditors"
+        }
+      }, 
+      {
+        "similarity": 73,
+        "origin": "1572538708492",
+        "source": "&lt;tuv xml:lang="en-GB">&lt;seg>Legal Compliance&lt;/seg>&lt;/tuv>",
+        "target": "&lt;tuv xml:lang="fr-FR">&lt;seg>Conformité légale&lt;/seg>&lt;/tuv>",
+        "properties": {
+          "creationdate": "20160725T141611Z",
+          "x-ConfirmationLevel": "ApprovedTranslation",
+          "subject": "Taxes",
+          "x-Origin": "TM",
+          "project": "Main TM",
+          "changedate": "20160727T093143Z",
+          "tuid": "1546700366038",
+          "creationid": "Aqcis9\Aqcis",
+          "changeid": "FG",
+          "lastusagedate": "20160727T093143Z",
+          "customer": "ACME Auditors"
+        }
+      }, 
+      {
+        "similarity": 100,
+        "origin": "fluenta",
+        "source": "&lt;tuv xml:lang="en-GB">&lt;seg>tax compliance&lt;/seg>&lt;/tuv>",
+        "target": "&lt;tuv xml:lang="fr-FR">&lt;seg>Conformité fiscale&lt;/seg>&lt;/tuv>",
+        "properties": {
+          "creationdate": "20171004T111450Z",
+          "subject": "Taxes",
+          "project": "Main TM",
+          "changedate": "20171004T111450Z",
+          "tuid": "1546700370945",
+          "changeid": "translator2",
+          "usagecount": "1",
+          "x-ConfirmationLevel": "Translated",
+          "x-Origin": "TM",
+          "creationid": "translator2",
+          "lastusagedate": "20171006T103930Z",
+          "customer": "ACME Auditors"
+        }
+      }
+    ],
+  },
+  "status": "OK"
+}</codeblock>
     </body>
 </topic>

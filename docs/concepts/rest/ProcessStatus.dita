@@ -7,7 +7,7 @@
         <p>Default: <codeph conref="../ServerAPI.dita#ServerAPI/defaultUrl"
             /><codeph>status</codeph></p>
 
-        <p>Send a <codeph>POST</codeph> request to the method end point with this parameters in a
+        <p>Send a <codeph>POST</codeph> request to the method end point with this parameter in a
             JSON body:</p>
         <simpletable>
             <sthead>
@@ -25,7 +25,7 @@
         <codeblock translate="no">{
   "process": "1568223016762"
 }</codeblock>
-        <p>The server responds with a JSON object containing two or three fields.</p>
+        <p>The server responds with a JSON object.</p>
         <p>On successful status check, field '<codeph>status</codeph>' is set to '<codeph>OK</codeph>'
             and field '<codeph>result</codeph>' contains current status.</p>
         <p>Example:</p>

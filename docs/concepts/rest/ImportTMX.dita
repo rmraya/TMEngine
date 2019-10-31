@@ -65,7 +65,7 @@
   "reason": "Unknown memory type"        
 }</codeblock>
         <p>After starting the import process, monitor its status using the <xref
-                href="../../topics/ProcessStatus.dita"/> method. On successful completion, the result will
+                href="ProcessStatus.dita"/> method. On successful completion, the result will
             contain the number of segments imported.</p>
         <p>Example:</p>
 
