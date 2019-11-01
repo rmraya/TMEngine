@@ -53,7 +53,7 @@ Add all .jar files from `/lib` folder to the classpath of your application and u
 
 Two classes implement interface `ITmEngine`:
 
-- `MapDbEngine` : a translation memory engine built using [MapDB](http://mapdb.org)
-- `SQLEngine` : a translation memory designed to be used with [MariaDB](https://mariadb.org/) or [MySQL](https://www.mysql.com/)
+- `MapDbEngine`: a translation memory engine built using [MapDB](http://mapdb.org)
+- `SQLEngine`: an implementation designed to be used with [MariaDB](https://mariadb.org/) or [MySQL](https://www.mysql.com/)
 
 See more details on the available Java methods in the [documentation](https://www.maxprograms.com/support/tmengine/TMEngine.html).
