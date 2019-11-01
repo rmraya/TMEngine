@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept PUBLIC "-//OASIS//DTD DITA Concept//EN" "concept.dtd">
+<concept id="methods">
+    <title>Interface Methods</title>
+    <shortdesc/>
+    <conbody>
+        <p>The methods exposed by <codeph>ITmEngine</codeph> interface are:</p>
+        <ul>
+            <li id="getName"><codeblock>public abstract String getName();</codeblock>
+                <p>Returns the name of the engine instance.</p></li>
+
+            <li id="getType"><codeblock>public abstract String getType();</codeblock>
+                <p>Returns the <apiname>ITmEngine</apiname> type used for storing data. Possible
+                    values are:</p>
+                <ul>
+                    <li>MapDbEngine</li>
+                    <li>SQLEngine</li>
+                </ul>
+            </li>
+
+            <li id="close"><codeblock>public abstract void close() throws IOException, SQLException;</codeblock>
+                <p>Closes the engine instance.</p>
+            </li>
+
+            <li id="storeTMX"><codeblock>public abstract int storeTMX(String tmxFile, String project, String customer, 
+                String subject) throws SAXException, IOException, 
+                ParserConfigurationException, SQLException;</codeblock>
+                <p>Imports a TMX document located at "<codeph>tmxFile</codeph>" and associates its
+                    data with "<codeph>project</codeph>", "<codeph>customer</codeph>" and
+                        "<codeph>subject</codeph>" properties</p>
+            </li>
+
+            <li id="exportMemory"><codeblock>public abstract void exportMemory(String tmxfile, Set&lt;String> langs, String 
+                srcLang, Map&lt;String, String> properties) throws IOException, 
+                SAXException, ParserConfigurationException, SQLException;</codeblock>
+                <p>Exports engine data to a TMX document located at "<codeph>tmxfile</codeph>".</p>
+                <p>The "<codeph>langs</codeph>" argument may contain a set of language codes. If
+                        "<codeph>langs</codeph>" is not null, only the entries with the given
+                    language codes are exported.</p>
+                <p>The "<codeph>srcLang</codeph>" argument indicates the source language assigned to
+                    the TMX file. It can be one of the languages from the data set (see "<xref
+                        href="#JavaApps/getAllLanguages">getAllLanguages()</xref>") or the string
+                        "<codeph>*all*</codeph>".</p>
+                <p>The "<codeph>properties</codeph>" argument may contain a set of property-value
+                    pairs to be set in the exported TMX file.</p>
+            </li>
+
+            <li id="flag"><codeblock>public abstract void flag(String tuid) throws SQLException;</codeblock>
+                <p>Adds the property "<codeph>x-flag</codeph>" and sets its value to
+                        "<codeph>SW-Flag</codeph>" to the translation unit identified by the
+                        "<codeph>tuid</codeph>" argument.</p>
+            </li>
+
+            <li id="getAllLanguages"><codeblock>public abstract Set&lt;String> getAllLanguages() throws SQLException;</codeblock>
+                <p>Returns a collection containing all language codes used in the engine's data.</p>
+            </li>
+
+            <li id="getAllClients"><codeblock>public abstract Set&lt;String> getAllClients() throws SQLException;</codeblock>
+                <p>Returns a collection containing all values assigned to the
+                        "<codeph>client</codeph>" property.</p>
+            </li>
+
+            <li id="getAllProjects"><codeblock>public abstract Set&lt;String> getAllProjects() throws SQLException;</codeblock>
+                <p>Returns a collection containing all values assigned to the
+                        "<codeph>project</codeph>" property.</p>
+            </li>
+
+            <li id="getAllSubjects"><codeblock>public abstract Set&lt;String> getAllSubjects() throws SQLException;</codeblock>
+                <p>Returns a collection containing all values assigned to the
+                        "<codeph>subject</codeph>" property.</p>
+            </li>
+
+            <li id="searchTranslation"><codeblock>public abstract List&lt;Match> searchTranslation(String searchStr, String 
+                srcLang, String tgtLang, int similarity, boolean 
+                caseSensitive) throws IOException, SAXException, 
+                ParserConfigurationException, SQLException;</codeblock>
+                <p>Returns a list of possible translations of the "<codeph>text</codeph>"
+                    argument.</p>
+                <p> The search result is restricted to entries with the source language indicated by
+                        "<codeph>srcLang</codeph>" and target language indicated by
+                        "<codeph>tgtLang</codeph>" whose similarity to the given text is greater or
+                    equal to the value of the "<codeph>similarity</codeph>" argument.</p>
+                <p>The "<codeph>caseSensitive</codeph>" argument indicates whether the search engine
+                    should consider letter case differences or not.</p>
+            </li>
+
+            <li id="concordanceSearch"><codeblock>public abstract List&lt;Element> concordanceSearch(String searchStr, 
+                String srcLang, int limit, boolean isRegexp, boolean 
+                caseSensitive) throws IOException, SAXException, 
+                ParserConfigurationException, SQLException;</codeblock>
+                <p>Returns a list of all translation units (&lt;tu> elements) that contain the text
+                    indicated in "<codeph>searchStr</codeph>" argument.</p>
+                <p>Searches are performed against the translation unit variant (&lt;tuv> element)
+                    with language set to "<codeph>srcLang</codeph>".</p>
+                <p> Search result contains at most "<codeph>limit</codeph>" entries. Returned data
+                    is in no particular order.</p>
+                <p>Argument "<codeph>isRegexp</codeph>" indicates whether the
+                        "<codeph>searchStr</codeph>" parameter should be considered a regular
+                    expression that matches the whole segment.</p>
+                <p>The "<codeph>caseSensitive</codeph>" argument indicates whether the search engine
+                    should consider letter case differences or not.</p>
+            </li>
+
+            <li id="storeTu"><codeblock>public abstract void storeTu(Element tu) throws IOException, SQLException;</codeblock>
+                <p>Stores translation unit "<codeph>tu</codeph>" into the database, overwriting any
+                    existing &lt;tu> element with the same "id" attribute.</p>
+            </li>
+
+            <li id="commit"><codeblock>public abstract void commit() throws SQLException;</codeblock>
+                <p>Flushes to disk any data held in memory and not written yet.</p>
+            </li>
+
+            <li id="getTu"><codeblock>public abstract Element getTu(String tuid) throws IOException, 
+                SAXException, ParserConfigurationException, SQLException;</codeblock>
+                <p>Returns the translation unit (&lt;tu> element) that has the "id" attribute set to
+                    the "<codeph>tuid</codeph>" argument.</p>
+            </li>
+
+            <li id="removeTu"><codeblock>public abstract void removeTu(String tuid) throws IOException, SAXException, 
+                ParserConfigurationException, SQLException;</codeblock>
+                <p>Removes from the database the &lt;tu> element that has the "id" attribute set to
+                    the "<codeph>tuid</codeph>" argument.</p>
+            </li>
+
+            <li><codeblock>public abstract void deleteDatabase() throws IOException, SQLException; </codeblock>
+                <ul>
+                    <li>When used with "<codeph>MapDbEngine</codeph>" instances, closes the engine
+                        and removes all associated files from disk;</li>
+                    <li>When used with "<codeph>SQLEngine</codeph>" instances, closes the engine and
+                        drops the associated database from the SQL server.</li>
+                </ul>
+            </li>
+        </ul>
+    </conbody>
+</concept>

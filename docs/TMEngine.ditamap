@@ -5,10 +5,7 @@
   <booktitle>
     <mainbooktitle> TMEngine</mainbooktitle>
     <booktitlealt>An Open Source Translation Memory Manager <image href="images/tmengine.png"
-        placement="break" align="center"/>
-      Copyright (c) 2003 - 2019 Maxprograms
-      
-    </booktitlealt>
+        placement="break" align="center"/> Copyright (c) 2003 - 2019 Maxprograms </booktitlealt>
   </booktitle>
   <frontmatter>
     <booklists>
@@ -18,27 +15,33 @@
   <chapter navtitle="Overview">
     <topicref href="concepts/TMEngine.dita"/>
   </chapter>
-  
+
   <chapter navtitle="Running as a Standalone Server">
     <topicref href="concepts/Server.dita"/>
+    <topicref href="concepts/serverStop.dita"/>
     <topicref href="concepts/ServerAPI.dita">
-    <topicref href="concepts/rest/CreateMemory.dita"/>
-    <topicref href="concepts/rest/ListMemories.dita"/>
-    <topicref href="concepts/rest/OpenMemory.dita"/>
-    <topicref href="concepts/rest/CloseMemory.dita"/>
-    <topicref href="concepts/rest/GetLanguages.dita"/>
-    <topicref href="concepts/rest/ImportTMX.dita"/>
-    <topicref href="concepts/rest/ProcessStatus.dita"/>
-    <topicref href="concepts/rest/ExportTMX.dita"/>
-    <topicref href="concepts/rest/SearchTranslations.dita"/>
-    <topicref href="concepts/rest/ConcordanceSearch.dita"/>
-    <topicref href="concepts/rest/RenameMemory.dita"/>
-    <topicref href="concepts/rest/DeleteMemory.dita"/>
-    <topicref href="concepts/rest/StopServer.dita"/>
+      <topicref href="concepts/rest/CreateMemory.dita"/>
+      <topicref href="concepts/rest/ListMemories.dita"/>
+      <topicref href="concepts/rest/OpenMemory.dita"/>
+      <topicref href="concepts/rest/CloseMemory.dita"/>
+      <topicref href="concepts/rest/GetLanguages.dita"/>
+      <topicref href="concepts/rest/ImportTMX.dita"/>
+      <topicref href="concepts/rest/ProcessStatus.dita"/>
+      <topicref href="concepts/rest/ExportTMX.dita"/>
+      <topicref href="concepts/rest/SearchTranslations.dita"/>
+      <topicref href="concepts/rest/ConcordanceSearch.dita"/>
+      <topicref href="concepts/rest/RenameMemory.dita"/>
+      <topicref href="concepts/rest/DeleteMemory.dita"/>
+      <topicref href="concepts/rest/StopServer.dita"/>
     </topicref>
   </chapter>
-  <chapter navtitle="Java Library">
-    
+  <chapter navtitle="Java Library"> 
+    <topicref href="concepts/JavaApps.dita"/>
+    <topicref href="concepts/dependencies.dita"/>
+    <topicref href="concepts/databases.dita"/>
+    <topicref href="concepts/ITmEngine.dita">
+      <topicref href="concepts/methods.dita"/>
+    </topicref>
   </chapter>
-  
+
 </bookmap>

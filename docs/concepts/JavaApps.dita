@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept PUBLIC "-//OASIS//DTD DITA Concept//EN" "concept.dtd">
+<concept id="JavaApps">
+    <title>Java Applications</title>
+    <shortdesc/>
+    <conbody>
+        <p>TMEngine can be embedded in a Java application that needs to deal with translation
+            memories.</p>
+    </conbody>
+</concept>

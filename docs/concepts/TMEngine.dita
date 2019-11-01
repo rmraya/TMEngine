@@ -4,12 +4,20 @@
     <title>TMEngine</title>
     <shortdesc>TMEngine is an open source <xref
             href="https://en.wikipedia.org/wiki/Translation_memory" scope="external" format="html"
-            >Translation Memory</xref>  (TM) manager written in Java.</shortdesc>
+            >Translation Memory</xref> (TM) manager written in Java.</shortdesc>
     <conbody>
+        <p>TMEngine is based on the translation memory library used by <xref
+                href="https://www.maxprograms.com/products/swordfish.html" scope="external"
+                format="html">Swordfish III</xref>, <xref
+                href="https://www.maxprograms.com/products/fluenta.html" format="html"
+                scope="external">Fluenta</xref> and <xref
+                href="https://www.maxprograms.com/products/remotetm.html" scope="external"
+                format="html">RemoteTM</xref>.</p>
         <p>TMEngine can be used in two ways:</p>
         <ul>
-            <li>As an embedded library that manages translation memories in a Java application;</li>
-            <li>As a standalone TM server via its REST API.</li>
+            <li>As a standalone TM server via its <xref href="ServerAPI.dita">REST API</xref>.</li>
+            <li>As an embedded library that manages translation memories in a <xref
+                    href="JavaApps.dita">Java application</xref>.</li>
         </ul>
         <p>The standalone server runs on these platforms:</p>
         <ul>
@@ -17,6 +25,9 @@
             <li>macOS 10.13, 10.14 and 10.15</li>
             <li>Linux (any version capable of running Java 11)</li>
         </ul>
-        <p>The .jar files included in TMEngine distributions are compiled with Java 11.</p> 
+        <p>A TMEngine server allows sharing Translation Memory data in a local network or over the
+            Internet.</p>
+
+        <note>The .jar files included in TMEngine distributions are compiled with Java 11.</note>
     </conbody>
 </concept>

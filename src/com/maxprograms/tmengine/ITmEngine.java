@@ -13,9 +13,9 @@ package com.maxprograms.tmengine;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.Vector;
 
 import javax.xml.parsers.ParserConfigurationException;
 
@@ -47,10 +47,10 @@ public interface ITmEngine {
 
 	public abstract Set<String> getAllSubjects() throws SQLException;
 
-	public abstract Vector<Match> searchTranslation(String searchStr, String srcLang, String tgtLang, int similarity,
+	public abstract List<Match> searchTranslation(String searchStr, String srcLang, String tgtLang, int similarity,
 			boolean caseSensitive) throws IOException, SAXException, ParserConfigurationException, SQLException;
 
-	public abstract Vector<Element> concordanceSearch(String searchStr, String srcLang, int limit, boolean isRegexp,
+	public abstract List<Element> concordanceSearch(String searchStr, String srcLang, int limit, boolean isRegexp,
 			boolean caseSensitive) throws IOException, SAXException, ParserConfigurationException, SQLException;
 
 	public abstract void storeTu(Element tu) throws IOException, SQLException;

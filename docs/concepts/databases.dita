@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept PUBLIC "-//OASIS//DTD DITA Concept//EN" "concept.dtd">
+<concept id="databases">
+    <title>Supported Databases</title>
+    <conbody>
+        <p>Two options are currently available for storing TM data:</p>
+        <ul>
+            <li><b>MapDB</b> databases</li>
+            <li><b>MySQL</b> or <b>MariaDB</b> databases.</li>
+        </ul>
+    </conbody>
+</concept>

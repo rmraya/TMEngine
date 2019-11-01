@@ -18,6 +18,7 @@ import java.lang.System.Logger;
 import java.lang.System.Logger.Level;
 import java.nio.charset.StandardCharsets;
 import java.text.MessageFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Hashtable;
@@ -27,7 +28,6 @@ import java.util.Map;
 import java.util.NavigableSet;
 import java.util.Set;
 import java.util.TreeSet;
-import java.util.Vector;
 import java.util.regex.Pattern;
 import java.util.regex.PatternSyntaxException;
 
@@ -200,10 +200,10 @@ public class MapDbEngine implements ITmEngine, AutoCloseable {
 	}
 
 	@Override
-	public Vector<Match> searchTranslation(String searchStr, String srcLang, String tgtLang, int similarity,
+	public List<Match> searchTranslation(String searchStr, String srcLang, String tgtLang, int similarity,
 			boolean caseSensitive) throws IOException, SAXException, ParserConfigurationException {
 
-		Vector<Match> result = new Vector<>();
+		List<Match> result = new ArrayList<>();
 
 		if (similarity == 100) {
 			// check for perfect matches
@@ -320,9 +320,9 @@ public class MapDbEngine implements ITmEngine, AutoCloseable {
 	}
 
 	@Override
-	public Vector<Element> concordanceSearch(String searchStr, String srcLang, int limit, boolean isRegexp,
+	public List<Element> concordanceSearch(String searchStr, String srcLang, int limit, boolean isRegexp,
 			boolean caseSensitive) throws IOException, SAXException, ParserConfigurationException {
-		Vector<Element> result = new Vector<>();
+		List<Element> result = new ArrayList<>();
 		Pattern pattern = null;
 		if (isRegexp) {
 			try {

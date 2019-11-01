@@ -26,8 +26,9 @@
   "process": "1568223016762"
 }</codeblock>
         <p>The server responds with a JSON object.</p>
-        <p>On successful status check, field '<codeph>status</codeph>' is set to '<codeph>OK</codeph>'
-            and field '<codeph>result</codeph>' contains current status.</p>
+        <p>On successful status check, field '<codeph>status</codeph>' is set to
+                '<codeph>OK</codeph>' and field '<codeph>result</codeph>' contains current
+            status.</p>
         <p>Example:</p>
 
 

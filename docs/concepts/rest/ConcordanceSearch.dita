@@ -75,7 +75,7 @@
 }</codeblock>
         <p>After starting the import process, monitor its status using the <xref
                 href="ProcessStatus.dita"/> method. </p>
-        <p>On successful completion, the result will contain an array of  &lt;tu> elements that
+        <p>On successful completion, the result will contain an array of &lt;tu> elements that
             contain the searched text in the <codeph>data</codeph> field.</p>
         <p>Example:</p>
         <codeblock>{

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept PUBLIC "-//OASIS//DTD DITA Concept//EN" "concept.dtd">
+<concept id="serverStop">
+    <title>Stopping the Server</title>
+    <conbody>
+        <p>A running TMEngine server can be stopped using the <xref href="rest/StopServer.dita">Stop
+                Server</xref> method from its REST API.</p>
+        <p>Simply visit "<codeph conref="ServerAPI.dita#ServerAPI/defaultUrl"
+            /><codeph>stop</codeph>" using a browser or open a connection to that URL when the
+            server is embedded in a Java application. Adjust the port number if necessary.</p>
+    </conbody>
+</concept>

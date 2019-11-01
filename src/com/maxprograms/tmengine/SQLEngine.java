@@ -23,6 +23,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Hashtable;
 import java.util.Iterator;
@@ -31,7 +32,6 @@ import java.util.Map;
 import java.util.Properties;
 import java.util.Set;
 import java.util.TreeSet;
-import java.util.Vector;
 
 import javax.xml.parsers.ParserConfigurationException;
 
@@ -338,9 +338,9 @@ public class SQLEngine implements ITmEngine {
 	}
 
 	@Override
-	public Vector<Match> searchTranslation(String searchStr, String srcLang, String tgtLang, int similarity,
+	public List<Match> searchTranslation(String searchStr, String srcLang, String tgtLang, int similarity,
 			boolean caseSensitive) throws IOException, SAXException, ParserConfigurationException, SQLException {
-		Vector<Match> result = new Vector<>();
+		List<Match> result = new ArrayList<>();
 
 		int[] ngrams = NGrams.getNGrams(searchStr);
 		int size = ngrams.length;
@@ -417,7 +417,7 @@ public class SQLEngine implements ITmEngine {
 	}
 
 	@Override
-	public Vector<Element> concordanceSearch(String searchStr, String srcLang, int limit, boolean isRegexp,
+	public List<Element> concordanceSearch(String searchStr, String srcLang, int limit, boolean isRegexp,
 			boolean caseSensitive) throws IOException, SAXException, ParserConfigurationException, SQLException {
 		Set<String> candidates = new TreeSet<>();
 		if (isRegexp) {
@@ -459,7 +459,7 @@ public class SQLEngine implements ITmEngine {
 				}
 			}
 		}
-		Vector<Element> result = new Vector<>();
+		List<Element> result = new ArrayList<>();
 		Iterator<String> it = candidates.iterator();
 		while (it.hasNext()) {
 			Element tu = getTu(it.next());

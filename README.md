@@ -4,6 +4,8 @@
 
 An open source [Translation Memory](https://en.wikipedia.org/wiki/Translation_memory) Engine written in Java.
 
+TMEngine is based on the translation memory library used by [Swordfish III](https://www.maxprograms.com/products/swordfish.html), [Fluenta](https://www.maxprograms.com/products/fluenta.html) and [RemoteTM](https://www.maxprograms.com/products/remotetm.html).
+
 TMEngine can be used either as an embedded library that manages translation memories in a Java application or as a standalone TM server via its REST API.
 
 ## Requirements

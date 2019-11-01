@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept PUBLIC "-//OASIS//DTD DITA Concept//EN" "concept.dtd">
+<concept id="Dependencies">
+    <title>Dependencies</title>
+
+    <conbody>
+        <p>TMEngine is built on top of <xref href="https://github.com/rmraya/OpenXLIFF"
+                format="html" scope="external">OpenXLIFF Filters</xref>, an open source project that
+            provides support for managing the XML side of TMX documents.</p>
+        <p>OpenXLIFF includes the last Java release of <xref href="http://www.mapdb.org"
+                scope="external" format="html">MapDB</xref>, modified to work with modules in Java
+            11 or newer.</p>
+        <p>MariaDB JDBC driver is also included as an optional dependency. MariaDB code does not
+            support mudularization at this moment. </p>
+        <p>Java 11 is used to compile and link TMEngine binaries for distribution. Newer versions of
+            Java can also be used.</p>
+    </conbody>
+</concept>

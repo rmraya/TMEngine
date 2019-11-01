@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept PUBLIC "-//OASIS//DTD DITA Concept//EN" "concept.dtd">
+<concept id="ITmEngine">
+    <title>ITmEngine Interface</title>
+    <shortdesc/>
+    <conbody>
+        <p>The interface <codeph>com.maxprograms.tmengine.ITmEngine</codeph> provides the set of
+            methods that applications can use to interact with TM data. </p>
+        <p>Applications that use TMEngine can work with the classes that implement
+                <codeph>ITmEngine</codeph> or implement new versions that work with other database
+            systems.</p>
+        <p>The classes that implement ITmEngine interface are:</p>
+        <ul id="ul_y31_2jy_4jb">
+            <li><codeph>com.maxprograms.tmengine.MapDbEngine</codeph></li>
+            <li><codeph>com.maxprograms.tmengine.SQLEngine</codeph></li>
+        </ul>
+    </conbody>
+</concept>

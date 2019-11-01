@@ -7,16 +7,18 @@
             parameters displays help for starting TMEngine as a standalone server.</p>
         <codeblock>Usage:
                 
-                tmserver.sh [-help] [-version] [-port portNumber]
+      tmserver.sh [-help] [-version] [-port portNumber]
                 
-                Where:
+      Where:
                 
-                -help:      (optional) Display this help information and exit
-                -version:   (optional) Display version &amp; build information and exit
-                -port:      (optional) Port for running HTTP server. Default is 8000</codeblock>
-        <p>You can verify that the server is running by visiting its default web page: <xref
+      -help:      (optional) Display this help information and exit
+      -version:   (optional) Display version &amp; build information and exit
+      -port:      (optional) Port for running HTTP server. Default is 8000</codeblock>
+
+        <note>You can verify that the server is running by visiting its default web page: <xref
                 href="http://localhost:8000/TMServer/" format="html" scope="external"
-                >http://localhost:8000/TMServer/</xref> (adjust port number if you change it).</p>
+                >http://localhost:8000/TMServer/</xref> (adjust port number if you change
+            it).</note>
 
     </conbody>
 </concept>
