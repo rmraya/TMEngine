@@ -351,9 +351,10 @@ public class SQLEngine implements ITmEngine {
 		int minLength = searchStr.length() * similarity / 100;
 		int maxLength = searchStr.length() * (200 - similarity) / 100;
 
-		String set = "" + ngrams[0];
+		StringBuilder set = new StringBuilder();
+		set.append("" + ngrams[0]);
 		for (int i = 1; i < size; i++) {
-			set = set + ',' + ngrams[i];
+			set.append("," + ngrams[i]);
 		}
 
 		Set<String> candidates = new TreeSet<>();
@@ -365,7 +366,7 @@ public class SQLEngine implements ITmEngine {
 					+ srcLang.replace('-', '_').toLowerCase() + " WHERE ngram in (?) and segSize>=? AND segSize<=?");
 			selectNgram.put(srcLang, stmt);
 		}
-		stmt.setString(1, set);
+		stmt.setString(1, set.toString());
 		stmt.setInt(2, minLength);
 		stmt.setInt(3, maxLength);
 
