@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE topic PUBLIC "-//OASIS//DTD DITA Topic//EN" "topic.dtd">
 <topic id="ProcessStatus">
-    <title>Process Status</title>
+    <title>Get Process Status</title>
     <body>
         <p>End Point: <codeph>[TMEngine URL]/status</codeph></p>
         <p>Default: <codeph conref="../ServerAPI.dita#ServerAPI/defaultUrl"
