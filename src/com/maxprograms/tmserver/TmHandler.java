@@ -81,17 +81,16 @@ public class TmHandler implements HttpHandler {
             request = readRequestBody(is);
         }
 
-        String response = "";
-
-        response = processRequest(uri.toString(), request).toString(2);
+        String response = processRequest(uri.toString(), request).toString();
+        byte[] bytes = response.getBytes(StandardCharsets.UTF_8);
         exchange.getResponseHeaders().add("content-type", "application/json");
-        exchange.sendResponseHeaders(200, response.getBytes(StandardCharsets.UTF_8).length + 1l);
-        try (BufferedReader reader = new BufferedReader(
-                new InputStreamReader(new ByteArrayInputStream(response.getBytes())))) {
+        exchange.sendResponseHeaders(200, bytes.length);
+        try (ByteArrayInputStream stream = new ByteArrayInputStream(bytes)) {
             try (OutputStream os = exchange.getResponseBody()) {
-                String line;
-                while ((line = reader.readLine()) != null) {
-                    os.write((line + "\n").getBytes(StandardCharsets.UTF_8));
+                byte[] array = new byte[2048];
+                int read;
+                while ((read = stream.read(array)) != -1) {
+                    os.write(array, 0, read);
                 }
             }
         }
