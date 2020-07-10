@@ -3,7 +3,7 @@
 <topic id="CloseMemory">
     <title>Close Memory</title>
     <body>
-        <p>End Point: <codeph>[TMEngine URL]/create</codeph></p>
+        <p>End Point: <codeph>[TMEngine URL]/close</codeph></p>
         <p>Default: <codeph conref="../ServerAPI.dita#ServerAPI/defaultUrl"
             /><codeph>close</codeph></p>
         <p>Send a '<codeph>POST</codeph>' request to the method end point with this parameter in a

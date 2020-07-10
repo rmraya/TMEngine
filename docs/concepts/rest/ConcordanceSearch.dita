@@ -59,7 +59,7 @@
   "caseSensitive": true
 }</codeblock>
         <p>On success, field '<codeph>status</codeph>' is set to '<codeph>OK</codeph>' and field
-                '<codeph>process</codeph>' contains the ID of the background import process that was
+                '<codeph>process</codeph>' contains the ID of the background search process that was
             initiated.</p>
 
         <codeblock translate="no">{
@@ -73,7 +73,7 @@
   "status": "failed",            
   "reason": "Unknown memory type"        
 }</codeblock>
-        <p>After starting the import process, monitor its status using the <xref
+        <p>After starting the search process, monitor its status using the <xref
                 href="ProcessStatus.dita"/> method. </p>
         <p>On successful completion, the result will contain an array of &lt;tu> elements that
             contain the searched text in the <codeph>data</codeph> field.</p>

@@ -74,7 +74,7 @@
                 srcLang, String tgtLang, int similarity, boolean 
                 caseSensitive) throws IOException, SAXException, 
                 ParserConfigurationException, SQLException;</codeblock>
-                <p>Returns a list of possible translations of the "<codeph>text</codeph>"
+                <p>Returns a list of possible translations of the "<codeph>searchStr</codeph>"
                     argument.</p>
                 <p> The search result is restricted to entries with the source language indicated by
                         "<codeph>srcLang</codeph>" and target language indicated by
