@@ -155,7 +155,7 @@ public class MapDbEngine implements ITmEngine, AutoCloseable {
 				if (langs != null) {
 					List<Element> tuvs = tu.getChildren("tuv");
 					Iterator<Element> et = tuvs.iterator();
-					while (it.hasNext()) {
+					while (et.hasNext()) {
 						Element tuv = et.next();
 						if (!langs.contains(tuv.getAttributeValue("xml:lang"))) {
 							tu.removeChild(tuv);
