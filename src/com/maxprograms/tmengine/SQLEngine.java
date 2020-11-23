@@ -23,8 +23,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.List;
@@ -32,16 +32,17 @@ import java.util.Map;
 import java.util.Properties;
 import java.util.Set;
 import java.util.TreeSet;
+import java.util.Vector;
 
 import javax.xml.parsers.ParserConfigurationException;
 
-import org.xml.sax.SAXException;
-
-import com.maxprograms.tmx.TMXReader;
 import com.maxprograms.tmutils.TMUtils;
+import com.maxprograms.tmx.TMXReader;
 import com.maxprograms.xml.Attribute;
 import com.maxprograms.xml.Element;
 import com.maxprograms.xml.Indenter;
+
+import org.xml.sax.SAXException;
 
 public class SQLEngine implements ITmEngine {
 
@@ -61,7 +62,7 @@ public class SQLEngine implements ITmEngine {
 
 	private long next;
 
-	private TreeSet<String> languages;
+	private Set<String> languages;
 
 	private PreparedStatement insertProperties;
 	private PreparedStatement removeProperties;
@@ -282,7 +283,7 @@ public class SQLEngine implements ITmEngine {
 
 	@Override
 	public Set<String> getAllClients() throws SQLException {
-		Set<String> result = new TreeSet<>();
+		Set<String> result = Collections.synchronizedSortedSet(new TreeSet<>());
 		try (Statement stmt = conn.createStatement()) {
 			try (ResultSet rs = stmt
 					.executeQuery("SELECT DISTINCT content FROM `" + dbName + "`.tuprop WHERE propType='customer'")) {
@@ -297,7 +298,7 @@ public class SQLEngine implements ITmEngine {
 	@Override
 	public Set<String> getAllLanguages() throws SQLException {
 		if (languages == null) {
-			languages = new TreeSet<>();
+			languages = Collections.synchronizedSortedSet(new TreeSet<>());
 			try (Statement stmt = conn.createStatement()) {
 				try (ResultSet rs = stmt.executeQuery("SELECT lang FROM `" + dbName + "`.langs")) {
 					while (rs.next()) {
@@ -311,7 +312,7 @@ public class SQLEngine implements ITmEngine {
 
 	@Override
 	public Set<String> getAllProjects() throws SQLException {
-		Set<String> result = new TreeSet<>();
+		Set<String> result = Collections.synchronizedSortedSet(new TreeSet<>());
 		try (Statement stmt = conn.createStatement()) {
 			try (ResultSet rs = stmt
 					.executeQuery("SELECT DISTINCT content FROM `" + dbName + "`.tuprop WHERE propType='project'")) {
@@ -325,7 +326,7 @@ public class SQLEngine implements ITmEngine {
 
 	@Override
 	public Set<String> getAllSubjects() throws SQLException {
-		Set<String> result = new TreeSet<>();
+		Set<String> result = Collections.synchronizedSortedSet(new TreeSet<>());
 		try (Statement stmt = conn.createStatement()) {
 			try (ResultSet rs = stmt
 					.executeQuery("SELECT DISTINCT content FROM `" + dbName + "`.tuprop WHERE propType='subject'")) {
@@ -340,7 +341,7 @@ public class SQLEngine implements ITmEngine {
 	@Override
 	public List<Match> searchTranslation(String searchStr, String srcLang, String tgtLang, int similarity,
 			boolean caseSensitive) throws IOException, SAXException, ParserConfigurationException, SQLException {
-		List<Match> result = new ArrayList<>();
+		List<Match> result = new Vector<>();
 
 		int[] ngrams = NGrams.getNGrams(searchStr);
 		int size = ngrams.length;
@@ -357,7 +358,7 @@ public class SQLEngine implements ITmEngine {
 			set.append("," + ngrams[i]);
 		}
 
-		Set<String> candidates = new TreeSet<>();
+		Set<String> candidates = Collections.synchronizedSortedSet(new TreeSet<>());
 		String lowerSearch = searchStr.toLowerCase();
 
 		PreparedStatement stmt = selectNgram.get(srcLang);
@@ -420,7 +421,7 @@ public class SQLEngine implements ITmEngine {
 	@Override
 	public List<Element> concordanceSearch(String searchStr, String srcLang, int limit, boolean isRegexp,
 			boolean caseSensitive) throws IOException, SAXException, ParserConfigurationException, SQLException {
-		Set<String> candidates = new TreeSet<>();
+		Set<String> candidates = Collections.synchronizedSortedSet(new TreeSet<>());
 		if (isRegexp) {
 			try (PreparedStatement stmt = conn.prepareStatement(
 					"SELECT tuid, pureText FROM `" + dbName + "`.tuv WHERE lang=? AND pureText REGEXP ? LIMIT ?")) {
@@ -460,7 +461,7 @@ public class SQLEngine implements ITmEngine {
 				}
 			}
 		}
-		List<Element> result = new ArrayList<>();
+		List<Element> result = new Vector<>();
 		Iterator<String> it = candidates.iterator();
 		while (it.hasNext()) {
 			Element tu = getTu(it.next());
@@ -511,7 +512,7 @@ public class SQLEngine implements ITmEngine {
 			tuProperties.put("project", currProject);
 		}
 		List<Element> tuvs = tu.getChildren("tuv");
-		Set<String> tuLangs = new TreeSet<>();
+		Set<String> tuLangs = Collections.synchronizedSortedSet(new TreeSet<>());
 
 		Iterator<Element> it = tuvs.iterator();
 		while (it.hasNext()) {
@@ -659,7 +660,7 @@ public class SQLEngine implements ITmEngine {
 	private Element getTu(String tuid, Set<String> langs)
 			throws SQLException, SAXException, IOException, ParserConfigurationException {
 		if (tuAttributes == null) {
-			tuAttributes = new TreeSet<>();
+			tuAttributes = Collections.synchronizedSortedSet(new TreeSet<>());
 			String[] array = new String[] { "tuid", "o-encoding", "datatype", "usagecount", "lastusagedate",
 					"creationtool", "creationtoolversion", "creationdate", "creationid", "changedate", "segtype",
 					"changeid", "o-tmf", "srclang" };
@@ -699,7 +700,7 @@ public class SQLEngine implements ITmEngine {
 
 	@Override
 	public Element getTu(String tuid) throws IOException, SAXException, ParserConfigurationException, SQLException {
-		return getTu(tuid, new TreeSet<>());
+		return getTu(tuid, Collections.synchronizedSortedSet(new TreeSet<>()));
 	}
 
 	private String getSegText(String lang, String tuid) throws SQLException {

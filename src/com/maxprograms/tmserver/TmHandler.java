@@ -27,9 +27,9 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
+import java.util.Collections;
 import java.util.Date;
 import java.util.Enumeration;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -388,7 +388,7 @@ public class TmHandler implements HttpHandler {
                 }
                 Set<String> langs = null;
                 if (json.has("langs")) {
-                    langs = new TreeSet<>();
+                    langs = Collections.synchronizedSortedSet(new TreeSet<>());
                     JSONArray array = json.getJSONArray("langs");
                     for (int i = 0; i < array.length(); i++) {
                         langs.add(array.getString(i));
@@ -396,7 +396,7 @@ public class TmHandler implements HttpHandler {
                 }
                 Map<String, String> properties = null;
                 if (json.has("properties")) {
-                    properties = new HashMap<>();
+                    properties = new ConcurrentHashMap<>();
                     JSONObject props = json.getJSONObject("properties");
                     Iterator<String> keys = props.keys();
                     while (keys.hasNext()) {
@@ -475,9 +475,7 @@ public class TmHandler implements HttpHandler {
         } else if ("SQLEngine".equals(mem.getString("type"))) {
             openEngines.put(id, new SQLEngine(mem.getString("name"), mem.getString("serverName"), mem.getInt("port"),
                     mem.getString("userName"), mem.getString("password")));
-        } else {
-            throw new IOException("Unknown memory type");
-        }
+        } 
     }
 
     protected void close(String id) throws IOException, SQLException {

@@ -18,9 +18,8 @@ import java.lang.System.Logger;
 import java.lang.System.Logger.Level;
 import java.nio.charset.StandardCharsets;
 import java.text.MessageFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.HashMap;
+import java.util.Collections;
 import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.List;
@@ -28,6 +27,7 @@ import java.util.Map;
 import java.util.NavigableSet;
 import java.util.Set;
 import java.util.TreeSet;
+import java.util.Vector;
 import java.util.regex.Pattern;
 import java.util.regex.PatternSyntaxException;
 
@@ -64,7 +64,7 @@ public class MapDbEngine implements ITmEngine, AutoCloseable {
 
 	public MapDbEngine(String dbname, String workFolder) throws IOException {
 		this.dbname = dbname;
-		tuAttributes = new TreeSet<>();
+		tuAttributes = Collections.synchronizedSortedSet(new TreeSet<>());
 		String[] array = new String[] { "tuid", "o-encoding", "datatype", "usagecount", "lastusagedate", "creationtool",
 				"creationtoolversion", "creationdate", "creationid", "changedate", "segtype", "changeid", "o-tmf",
 				"srclang" };
@@ -111,7 +111,7 @@ public class MapDbEngine implements ITmEngine, AutoCloseable {
 	}
 
 	@Override
-	public void close() throws IOException {
+	public synchronized void close() throws IOException {
 		fuzzyIndex.close();
 		tuDb.close();
 		tuvDb.close();
@@ -203,7 +203,7 @@ public class MapDbEngine implements ITmEngine, AutoCloseable {
 	public List<Match> searchTranslation(String searchStr, String srcLang, String tgtLang, int similarity,
 			boolean caseSensitive) throws IOException, SAXException, ParserConfigurationException {
 
-		List<Match> result = new ArrayList<>();
+		List<Match> result = new Vector<>();
 
 		if (similarity == 100) {
 			// check for perfect matches
@@ -241,7 +241,7 @@ public class MapDbEngine implements ITmEngine, AutoCloseable {
 			int min = size * similarity / 100;
 			int max = size * (200 - similarity) / 100;
 
-			Map<String, Integer> candidates = new HashMap<>();
+			Map<String, Integer> candidates = new Hashtable<>();
 			String lowerSearch = searchStr.toLowerCase();
 
 			NavigableSet<Fun.Tuple2<Integer, String>> index = fuzzyIndex.getIndex(srcLang);
@@ -322,7 +322,7 @@ public class MapDbEngine implements ITmEngine, AutoCloseable {
 	@Override
 	public List<Element> concordanceSearch(String searchStr, String srcLang, int limit, boolean isRegexp,
 			boolean caseSensitive) throws IOException, SAXException, ParserConfigurationException {
-		List<Element> result = new ArrayList<>();
+		List<Element> result = new Vector<>();
 		Pattern pattern = null;
 		if (isRegexp) {
 			try {
@@ -379,7 +379,7 @@ public class MapDbEngine implements ITmEngine, AutoCloseable {
 		if (tu.getAttributeValue("creationid").isEmpty()) {
 			tu.setAttribute("creationid", System.getProperty("user.name"));
 		}
-		Map<String, String> tuProperties = new HashMap<>();
+		Map<String, String> tuProperties = new Hashtable<>();
 
 		List<Attribute> atts = tu.getAttributes();
 		Iterator<Attribute> at = atts.iterator();
@@ -403,7 +403,7 @@ public class MapDbEngine implements ITmEngine, AutoCloseable {
 			tuProperties.put("project", currProject);
 		}
 		List<Element> tuvs = tu.getChildren("tuv");
-		Set<String> tuLangs = new TreeSet<>();
+		Set<String> tuLangs = Collections.synchronizedSortedSet(new TreeSet<>());
 
 		Iterator<Element> it = tuvs.iterator();
 		while (it.hasNext()) {
@@ -440,7 +440,7 @@ public class MapDbEngine implements ITmEngine, AutoCloseable {
 	}
 
 	@Override
-	public void commit() {
+	public synchronized void commit() {
 		fuzzyIndex.commit();
 		tuDb.commit();
 		tuvDb.commit();

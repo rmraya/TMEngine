@@ -11,12 +11,13 @@
  *******************************************************************************/
 package com.maxprograms.tmengine;
 
-import java.util.ArrayList;
-import java.util.HashSet;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 import java.util.StringTokenizer;
+import java.util.TreeSet;
+import java.util.Vector;
 
 public class NGrams {
 
@@ -32,7 +33,7 @@ public class NGrams {
 	public static int[] getNGrams(String string) {
 		String src = string.toLowerCase();
 		List<String> words = buildWordList(src);
-		Set<String> set = new HashSet<>();
+		Set<String> set = Collections.synchronizedSortedSet(new TreeSet<>());
 		
 		Iterator<String> it = words.iterator();
 		while (it.hasNext()) {
@@ -64,7 +65,7 @@ public class NGrams {
 	}
 
 	private static List<String> buildWordList(String src) {
-		List<String> result = new ArrayList<>();
+		List<String> result = new Vector<>();
 		StringTokenizer tokenizer = new StringTokenizer(src, SEPARATORS);
 		while (tokenizer.hasMoreElements()) {
 			result.add(tokenizer.nextToken());
