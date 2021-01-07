@@ -26,7 +26,7 @@ Ready to use distributions are available at [https://www.maxprograms.com/product
 ## Related Links
 
 - [TMEngine Manual (PDF)](https://www.maxprograms.com/support/tmengine.pdf)
-- [TMEgine Manual (Web Help)](https://www.maxprograms.com/support/tmengine/TMEngine.html)
+- [TMEgine Manual (Web Help)](https://www.maxprograms.com/support/tmengine.html)
 
 ## Standalone Server
 
