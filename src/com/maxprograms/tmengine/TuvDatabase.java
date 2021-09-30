@@ -42,8 +42,7 @@ public class TuvDatabase {
 
 	private void buildIndex(String lang) throws IOException {
 		try {
-			DB mapdb = DBMaker.newFileDB(new File(folder, "tuv_" + lang)).closeOnJvmShutdown().asyncWriteEnable()
-					.make();
+			DB mapdb = DBMaker.newFileDB(new File(folder, "tuv_" + lang)).closeOnJvmShutdown().make();
 			databases.put(lang, mapdb);
 			textMaps.put(lang, databases.get(lang).getTreeMap("tuvs"));
 			hashesMaps.put(lang, databases.get(lang).getTreeMap("hashes"));
