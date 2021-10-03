@@ -35,6 +35,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
+import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
 import javax.xml.parsers.ParserConfigurationException;
@@ -227,7 +228,8 @@ public class TmHandler implements HttpHandler {
     private JSONObject flag(String request) {
         JSONObject result = new JSONObject();
         final JSONObject json = new JSONObject(request);
-        final String process = "" + System.currentTimeMillis();
+        final String process = UUID.randomUUID().toString();
+        openTasks.put(process, new String[] { Constants.PENDING });
         new Thread(() -> {
             try {
                 String id = json.getString("id");
@@ -245,7 +247,6 @@ public class TmHandler implements HttpHandler {
                 openTasks.put(process, new String[] { Constants.FAILED, e.getMessage() });
             }
         }).start();
-        openTasks.put(process, new String[] { Constants.PENDING });
         result.put("process", process);
         return result;
     }
@@ -253,7 +254,8 @@ public class TmHandler implements HttpHandler {
     private JSONObject searchTranslations(String request) {
         JSONObject result = new JSONObject();
         final JSONObject json = new JSONObject(request);
-        final String process = "" + System.currentTimeMillis();
+        final String process = UUID.randomUUID().toString();
+        openTasks.put(process, new String[] { Constants.PENDING });
         new Thread(() -> {
             try {
                 String id = json.getString("id");
@@ -279,7 +281,6 @@ public class TmHandler implements HttpHandler {
                 openTasks.put(process, new String[] { Constants.FAILED, e.getMessage() });
             }
         }).start();
-        openTasks.put(process, new String[] { Constants.PENDING });
         result.put("process", process);
         return result;
     }
@@ -287,7 +288,8 @@ public class TmHandler implements HttpHandler {
     private JSONObject concordanceSearch(String request) {
         JSONObject result = new JSONObject();
         final JSONObject json = new JSONObject(request);
-        final String process = "" + System.currentTimeMillis();
+        final String process = UUID.randomUUID().toString();
+        openTasks.put(process, new String[] { Constants.PENDING });
         new Thread(() -> {
             try {
                 String id = json.getString("id");
@@ -313,7 +315,6 @@ public class TmHandler implements HttpHandler {
                 openTasks.put(process, new String[] { Constants.FAILED, e.getMessage() });
             }
         }).start();
-        openTasks.put(process, new String[] { Constants.PENDING });
         result.put("process", process);
         return result;
     }
@@ -321,7 +322,8 @@ public class TmHandler implements HttpHandler {
     private JSONObject getLanguages(String request) {
         JSONObject result = new JSONObject();
         final JSONObject json = new JSONObject(request);
-        final String process = "" + System.currentTimeMillis();
+        final String process = UUID.randomUUID().toString();
+        openTasks.put(process, new String[] { Constants.PENDING });
         new Thread(() -> {
             try {
                 String id = json.getString("id");
@@ -346,7 +348,6 @@ public class TmHandler implements HttpHandler {
                 openTasks.put(process, new String[] { Constants.FAILED, e.getMessage() });
             }
         }).start();
-        openTasks.put(process, new String[] { Constants.PENDING });
         result.put("process", process);
         return result;
     }
@@ -378,7 +379,8 @@ public class TmHandler implements HttpHandler {
     private JSONObject exportMemory(String request) {
         JSONObject result = new JSONObject();
         final JSONObject json = new JSONObject(request);
-        final String process = "" + System.currentTimeMillis();
+        final String process = UUID.randomUUID().toString();
+        openTasks.put(process, new String[] { Constants.PENDING });
         new Thread(() -> {
             try {
                 String id = json.getString("id");
@@ -419,7 +421,6 @@ public class TmHandler implements HttpHandler {
                 openTasks.put(process, new String[] { Constants.FAILED, e.getMessage() });
             }
         }).start();
-        openTasks.put(process, new String[] { Constants.PENDING });
         result.put("process", process);
         return result;
     }
@@ -427,7 +428,8 @@ public class TmHandler implements HttpHandler {
     private JSONObject importTMX(String request) {
         JSONObject result = new JSONObject();
         final JSONObject json = new JSONObject(request);
-        final String process = "" + System.currentTimeMillis();
+        final String process = UUID.randomUUID().toString();
+        openTasks.put(process, new String[] { Constants.PENDING });
         new Thread(() -> {
             try {
                 String id = json.getString("id");
@@ -460,7 +462,6 @@ public class TmHandler implements HttpHandler {
                 openTasks.put(process, new String[] { Constants.FAILED, e.getMessage() });
             }
         }).start();
-        openTasks.put(process, new String[] { Constants.PENDING });
         result.put("process", process);
         return result;
     }
@@ -469,13 +470,15 @@ public class TmHandler implements HttpHandler {
         if (!memories.containsKey(id)) {
             throw new IOException("Unknown memory");
         }
-        JSONObject mem = memories.get(id);
-        if ("MapDbEngine".equals(mem.getString("type"))) {
-            openEngines.put(id, new MapDbEngine(id, getWorkFolder()));
-        } else if ("SQLEngine".equals(mem.getString("type"))) {
-            openEngines.put(id, new SQLEngine(mem.getString("name"), mem.getString("serverName"), mem.getInt("port"),
-                    mem.getString("userName"), mem.getString("password")));
-        } 
+        if (!openEngines.containsKey(id)) {
+            JSONObject mem = memories.get(id);
+            if ("MapDbEngine".equals(mem.getString("type"))) {
+                openEngines.put(id, new MapDbEngine(id, getWorkFolder()));
+            } else if ("SQLEngine".equals(mem.getString("type"))) {
+                openEngines.put(id, new SQLEngine(mem.getString("name"), mem.getString("serverName"),
+                        mem.getInt("port"), mem.getString("userName"), mem.getString("password")));
+            }
+        }
     }
 
     protected void close(String id) throws IOException, SQLException {
@@ -584,7 +587,7 @@ public class TmHandler implements HttpHandler {
         JSONObject json = new JSONObject(request);
         try {
             if (!json.has("id")) {
-                json.put("id", "" + System.currentTimeMillis());
+                json.put("id", UUID.randomUUID().toString());
             }
             if (memories.containsKey(json.getString("id"))) {
                 result.put("reason", "Duplicated id");
