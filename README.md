@@ -1,4 +1,4 @@
-<div style="margin:20px; border:1px solid red; border-radius: 8px; padding: 8px; box-shadow:0px 0px 4px;">This project is not maintained. Please use <b>RemoteTM</b> (<a href="https://github.com/rmraya/RemoteTM">https://github.com/rmraya/RemoteTM</a>) instead.
+# This project is not maintained. Please use [RemoteTM](https://github.com/rmraya/RemoteTM) instead.
 
 </div>
 
