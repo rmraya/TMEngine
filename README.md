@@ -1,3 +1,7 @@
+<div style="margin:20px; border:1px solid red; border-radius: 8px; padding: 8px; box-shadow:0px 0px 4px;">This project is not maintained. Please use <b>RemoteTM</b> (<a href="https://github.com/rmraya/RemoteTM">https://github.com/rmraya/RemoteTM</a>) instead.
+
+</div>
+
 # TMEngine
 
 <img src="https://www.maxprograms.com/images/tmengine_s.png" alt="TMEngine logo"/>
